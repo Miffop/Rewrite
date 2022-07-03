@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.Parser.TokenParsers
+namespace Swap.Parser.Syntax.TokenParsers
 {
     internal class ArithmeticParser:ITokenParser
     {

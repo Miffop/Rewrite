@@ -60,15 +60,15 @@
     <Compile Include="AST\Values\VInteger.cs" />
     <Compile Include="AST\Values\VNode.cs" />
     <Compile Include="AST\Values\VString.cs" />
-    <Compile Include="Parser\ITokenParser.cs" />
-    <Compile Include="Parser\SyntaxParser.cs" />
-    <Compile Include="Parser\Token.cs" />
-    <Compile Include="Parser\TokenParsers\ArithmeticParser.cs" />
-    <Compile Include="Parser\TokenParsers\BraceParser.cs" />
-    <Compile Include="Parser\TokenParsers\IntParser.cs" />
-    <Compile Include="Parser\TokenParsers\SemiColonParser.cs" />
-    <Compile Include="Parser\TokenParsers\StringParser.cs" />
-    <Compile Include="Parser\TokenParsers\WordParser.cs" />
+    <Compile Include="Parser\Syntax\ITokenParser.cs" />
+    <Compile Include="Parser\Syntax\SyntaxParser.cs" />
+    <Compile Include="Parser\Syntax\Token.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\ArithmeticParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\BraceParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\IntParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\SemiColonParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\StringParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\WordParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Swap.AST;
-using Swap.Parser;
+using Swap.Parser.Syntax;
 
 namespace Swap
 {
@@ -14,14 +14,14 @@ namespace Swap
     {
         static void Main(string[] args)
         {
-            var sp = new Parser.SyntaxParser(new List<ITokenParser>() 
+            var sp = new Parser.Syntax.SyntaxParser(new List<ITokenParser>() 
             {
-                new Parser.TokenParsers.ArithmeticParser(),
-                new Parser.TokenParsers.BraceParser(),
-                new Parser.TokenParsers.IntParser(),
-                new Parser.TokenParsers.SemiColonParser(),
-                new Parser.TokenParsers.StringParser(),
-                new Parser.TokenParsers.WordParser(),
+                new Parser.Syntax.TokenParsers.ArithmeticParser(),
+                new Parser.Syntax.TokenParsers.BraceParser(),
+                new Parser.Syntax.TokenParsers.IntParser(),
+                new Parser.Syntax.TokenParsers.SemiColonParser(),
+                new Parser.Syntax.TokenParsers.StringParser(),
+                new Parser.Syntax.TokenParsers.WordParser(),
             });
 
             string path = "./../../Test.txt";
