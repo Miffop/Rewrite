@@ -1,0 +1,12 @@
+﻿1.Swap(current,this:2:3);
+2.
+{
+	2."Hello";
+	3.Print(root:2);
+}
+3.
+{
+	1.Input(this:1);
+	2.Print(this:1);
+}
+4.Goto(current);
