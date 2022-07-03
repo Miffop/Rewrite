@@ -60,6 +60,7 @@
     <Compile Include="AST\Values\VInteger.cs" />
     <Compile Include="AST\Values\VNode.cs" />
     <Compile Include="AST\Values\VString.cs" />
+    <Compile Include="Parser\Expressions\IOperationParser.cs" />
     <Compile Include="Parser\Syntax\ITokenParser.cs" />
     <Compile Include="Parser\Syntax\SyntaxParser.cs" />
     <Compile Include="Parser\Syntax\Token.cs" />
