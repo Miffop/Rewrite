@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class DiffExpression:IExpression
+    internal class DiffExpression: IOptimizableExpression
     {
-        IExpression AExp, BExp;
+        public IExpression AExp, BExp;
         public DiffExpression(IExpression a,IExpression b)
         {
             this.AExp = a;
@@ -41,6 +41,49 @@ namespace Swap.AST.Expressions.Math
         public string Stringify()
         {
             return $"({AExp.Stringify()} - {BExp.Stringify()})";
+        }
+        public bool IsConstant()
+        {
+            return
+                AExp is IOptimizableExpression &&
+                BExp is IOptimizableExpression &&
+                (AExp as IOptimizableExpression).IsConstant() &&
+                (BExp as IOptimizableExpression).IsConstant();
+
+        }
+        public IExpression Optimise()
+        {
+            if (AExp is IOptimizableExpression)
+            {
+                AExp = (AExp as IOptimizableExpression).Optimise();
+            }
+            if (BExp is IOptimizableExpression)
+            {
+                BExp = (BExp as IOptimizableExpression).Optimise();
+            }
+            if (IsConstant())
+            {
+                return new ValueExpression(Eval(null));
+            }
+            else if (AExp is SumExpression)
+            {
+                SumExpression ASum = AExp as SumExpression;
+                if (ASum.BExp is IOptimizableExpression && (ASum.BExp as IOptimizableExpression).IsConstant())
+                {
+                    ASum.BExp = new DiffExpression(ASum.BExp, this.BExp).Optimise();
+                    return ASum;
+                }
+            }
+            else if (AExp is DiffExpression)
+            {
+                DiffExpression ADiff = AExp as DiffExpression;
+                if (ADiff.BExp is IOptimizableExpression && (ADiff.BExp as IOptimizableExpression).IsConstant())
+                {
+                    ADiff.BExp = new SumExpression(ADiff.BExp, this.BExp).Optimise();
+                    return ADiff;
+                }
+            }
+            return this;
         }
     }
 }

@@ -12,10 +12,12 @@ namespace Swap.Parser.Expressions
     {
         List<IOperationParser> Operations;
         List<IValueParser> Values;
-        public ExpressionParser(List<IOperationParser> operations,List<IValueParser> values)
+        bool Optimization;
+        public ExpressionParser(List<IOperationParser> operations,List<IValueParser> values,bool optimization)
         {
             this.Operations = operations;
             this.Values = values;
+            this.Optimization = optimization;
         }
         public IExpression Parse(List<Syntax.Token> code, int index, int length)
         {
@@ -76,7 +78,12 @@ namespace Swap.Parser.Expressions
             }
             else
             {
-                return operation.Parse(code[index + operationIndex].Argument, Parse(code, index, operationIndex), Parse(code, index + operationIndex + 1, length - operationIndex - 1));
+                IExpression res = operation.Parse(code[index + operationIndex].Argument, Parse(code, index, operationIndex), Parse(code, index + operationIndex + 1, length - operationIndex - 1));
+                if(res is IOptimizableExpression && Optimization)
+                {
+                    res = (res as IOptimizableExpression).Optimise();
+                }
+                return res;
             }
         }
     }

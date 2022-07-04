@@ -60,6 +60,7 @@
     <Compile Include="AST\Expressions\ValueExpression.cs" />
     <Compile Include="AST\ICommand.cs" />
     <Compile Include="AST\IExpression.cs" />
+    <Compile Include="AST\IOptimizableExpression.cs" />
     <Compile Include="AST\IValue.cs" />
     <Compile Include="AST\ProgramList.cs" />
     <Compile Include="AST\Values\VNull.cs" />

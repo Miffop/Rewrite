@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class MulExpression:IExpression
+    internal class MulExpression:IOptimizableExpression
     {
         IExpression AExp, BExp;
         public MulExpression(IExpression a,IExpression b)
@@ -51,6 +51,34 @@ namespace Swap.AST.Expressions.Math
         public string Stringify()
         {
             return $"({AExp.Stringify()} * {BExp.Stringify()})";
+        }
+        public bool IsConstant()
+        {
+            return
+                AExp is IOptimizableExpression &&
+                BExp is IOptimizableExpression &&
+                (AExp as IOptimizableExpression).IsConstant() &&
+                (BExp as IOptimizableExpression).IsConstant();
+
+        }
+        public IExpression Optimise()
+        {
+            if (AExp is IOptimizableExpression)
+            {
+                AExp = (AExp as IOptimizableExpression).Optimise();
+            }
+            if (BExp is IOptimizableExpression)
+            {
+                BExp = (BExp as IOptimizableExpression).Optimise();
+            }
+            if (IsConstant())
+            {
+                return new ValueExpression(Eval(null));
+            }
+            else
+            {
+                return this;
+            }
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class SumExpression:IExpression
+    internal class SumExpression : IOptimizableExpression
     {
-        IExpression AExp, BExp;
-        public SumExpression(IExpression a,IExpression b)
+        public IExpression AExp, BExp;
+        public SumExpression(IExpression a, IExpression b)
         {
             this.AExp = a;
             this.BExp = b;
@@ -22,17 +22,17 @@ namespace Swap.AST.Expressions.Math
             int iA, iB;
             string sA, sB;
             LinkedListNode<ICommand> nA;
-            if(A.GetInteger(out iA) && B.GetInteger(out iB))
+            if (A.GetInteger(out iA) && B.GetInteger(out iB))
             {
                 return new Values.VInteger(iA + iB);
             }
-            else if(A.GetString(out sA) && B.GetString(out sB))
+            else if (A.GetString(out sA) && B.GetString(out sB))
             {
                 return new Values.VString(sA + sB);
             }
-            else if(A.GetNode(out nA) && B.GetInteger(out iB))
+            else if (A.GetNode(out nA) && B.GetInteger(out iB))
             {
-                for(int i = 0; i < iB; i++)
+                for (int i = 0; i < iB; i++)
                 {
                     nA = nA.Next;
                 }
@@ -46,6 +46,50 @@ namespace Swap.AST.Expressions.Math
         public string Stringify()
         {
             return $"({AExp.Stringify()} + {BExp.Stringify()})";
+        }
+
+        public bool IsConstant()
+        {
+            return
+                AExp is IOptimizableExpression && 
+                BExp is IOptimizableExpression &&
+                (AExp as IOptimizableExpression).IsConstant() &&
+                (BExp as IOptimizableExpression).IsConstant();
+
+        }
+        public IExpression Optimise()
+        {
+            if(AExp is IOptimizableExpression)
+            {
+                AExp = (AExp as IOptimizableExpression).Optimise();
+            }
+            if(BExp is IOptimizableExpression)
+            {
+                BExp = (BExp as IOptimizableExpression).Optimise();
+            }
+            if(IsConstant())
+            {
+                return new ValueExpression(Eval(null));
+            }
+            else if (AExp is SumExpression)
+            {
+                SumExpression ASum = AExp as SumExpression;
+                if (ASum.BExp is IOptimizableExpression && (ASum.BExp as IOptimizableExpression).IsConstant())
+                {
+                    ASum.BExp = new SumExpression(ASum.BExp, this.BExp).Optimise();
+                    return ASum;
+                }
+            }
+            else if(AExp is DiffExpression)
+            {
+                DiffExpression ADiff = AExp as DiffExpression;
+                if (ADiff.BExp is IOptimizableExpression && (ADiff.BExp as IOptimizableExpression).IsConstant())
+                {
+                    ADiff.BExp = new DiffExpression(ADiff.BExp, this.BExp).Optimise();
+                    return ADiff;
+                }
+            }
+            return this;
         }
     }
 }

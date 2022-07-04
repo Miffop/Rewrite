@@ -26,7 +26,7 @@ namespace Swap
                 new Parser.Syntax.TokenParsers.WordParser(),
                 new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = "-4+2 - null";
+                string code = "(2+this-4+2-2+3-2+1+4)";
                 tokens = sp.Parse(code);
             }
             IExpression result;
@@ -41,12 +41,13 @@ namespace Swap
                         new Parser.Expressions.ValueParsers.IntAndStringParser(),
                         new Parser.Expressions.ValueParsers.NodeNamesParser(),
                         new Parser.Expressions.ValueParsers.NullParser(),
-                    }
+                    },
+                    true
                 );
                 result = ep.Parse(tokens, 0, tokens.Count);
             }
             Console.WriteLine(result.Stringify());
-            Console.WriteLine(result.Eval(null).Stringify());
+            //Console.WriteLine(result.Eval(null).Stringify());
 
             Console.ReadKey();
         }
