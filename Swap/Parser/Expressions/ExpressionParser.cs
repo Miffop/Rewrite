@@ -38,7 +38,7 @@ namespace Swap.Parser.Expressions
                     foreach(IOperationParser currentOp in Operations)
                     {
                         int currentPriority;
-                        if (currentOp.GetPriority(code[index + i].Argument, out currentPriority) && currentPriority > priority)
+                        if (currentOp.GetPriority(code[index + i].Argument, out currentPriority) && currentPriority >= priority)
                         {
                             operation = currentOp;
                             priority = currentPriority;

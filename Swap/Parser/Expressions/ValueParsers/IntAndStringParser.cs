@@ -20,6 +20,9 @@ namespace Swap.Parser.Expressions.ValueParsers
                     case "String":
                         val = new AST.Expressions.ValueExpression(new AST.Values.VString(code[index].Argument));
                         return true;
+                    case "UString":
+                        val = new AST.Expressions.ValueExpression(new AST.Values.VUString(code[index].Argument));
+                        return true;
                 }
             }
             val = null;

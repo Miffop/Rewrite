@@ -24,8 +24,9 @@ namespace Swap
                 new Parser.Syntax.TokenParsers.SemiColonParser(),
                 new Parser.Syntax.TokenParsers.StringParser(),
                 new Parser.Syntax.TokenParsers.WordParser(),
+                new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = "((this))";
+                string code = "[`2`*2+\"2\"] * (4/3/2)";
                 tokens = sp.Parse(code);
             }
             IExpression result;
@@ -33,7 +34,7 @@ namespace Swap
                 var ep = new Parser.Expressions.ExpressionParser(
                     new List<Parser.Expressions.IOperationParser>()
                     {
-
+                        new Parser.Expressions.OperationParsers.MathOperationParser(),
                     },
                     new List<Parser.Expressions.IValueParser>()
                     {
@@ -44,6 +45,7 @@ namespace Swap
                 result = ep.Parse(tokens, 0, tokens.Count);
             }
             Console.WriteLine(result.Stringify());
+            Console.WriteLine(result.Eval(null).Stringify());
 
             Console.ReadKey();
         }

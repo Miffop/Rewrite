@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Values
 {
-    internal class VInteger:IValue
+    internal class VUString:IValue
     {
-        int n;
-        public VInteger(int i)
+        string str;
+        public VUString(string s)
         {
-            this.n = i;
+            this.str = s;
         }
         public bool GetInteger(out int i)
         {
-            i = this.n;
-            return true;
+            i = 0;
+            return false;
         }
         public bool GetString(out string s)
         {
-            s = this.n.ToString();
+            s = this.str;
             return true;
         }
-        public bool GetNode(out LinkedListNode<ICommand> node)
+        public bool GetNode(out LinkedListNode<ICommand> n)
         {
-            node = null;
+            n = null;
             return false;
         }
         public string Stringify()
         {
-            return $"{n}";
+            return $"`{str.Replace("\\", "\\b").Replace("\"", "\\q")}`";
         }
     }
 }

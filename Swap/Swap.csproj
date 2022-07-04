@@ -51,6 +51,10 @@
     <Compile Include="AST\Commands\SwapCommand.cs" />
     <Compile Include="AST\Context.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
+    <Compile Include="AST\Expressions\Math\MulExpression.cs" />
+    <Compile Include="AST\Expressions\Math\DivExpression.cs" />
+    <Compile Include="AST\Expressions\Math\DiffExpression.cs" />
+    <Compile Include="AST\Expressions\Math\SumExpression.cs" />
     <Compile Include="AST\Expressions\RootNodeExpression.cs" />
     <Compile Include="AST\Expressions\ThisBlockExpression.cs" />
     <Compile Include="AST\Expressions\ValueExpression.cs" />
@@ -60,10 +64,12 @@
     <Compile Include="AST\ProgramList.cs" />
     <Compile Include="AST\Values\VInteger.cs" />
     <Compile Include="AST\Values\VNode.cs" />
+    <Compile Include="AST\Values\VUString.cs" />
     <Compile Include="AST\Values\VString.cs" />
     <Compile Include="Parser\Expressions\ExpressionParser.cs" />
     <Compile Include="Parser\Expressions\IValueParser.cs" />
     <Compile Include="Parser\Expressions\IOperationParser.cs" />
+    <Compile Include="Parser\Expressions\OperationParsers\MathOperationParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\IntAndStringParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\NodeNamesParser.cs" />
     <Compile Include="Parser\Syntax\ITokenParser.cs" />
@@ -73,6 +79,7 @@
     <Compile Include="Parser\Syntax\TokenParsers\BraceParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\IntParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\SemiColonParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\UStringParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\StringParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\WordParser.cs" />
     <Compile Include="Program.cs" />
@@ -84,8 +91,6 @@
   <ItemGroup>
     <Content Include="Test.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Parser\Expressions\OperationParsers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

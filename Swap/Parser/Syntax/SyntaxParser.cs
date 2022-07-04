@@ -15,6 +15,7 @@ namespace Swap.Parser.Syntax
         }
         public List<Token> Parse(string code)
         {
+            code += " ";
             List<Token> result = new List<Token>();
             int index = 0;
             while (index<code.Length)
