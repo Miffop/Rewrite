@@ -51,6 +51,7 @@
     <Compile Include="AST\Commands\SwapCommand.cs" />
     <Compile Include="AST\Context.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
+    <Compile Include="AST\Expressions\RootNodeExpression.cs" />
     <Compile Include="AST\Expressions\ThisBlockExpression.cs" />
     <Compile Include="AST\Expressions\ValueExpression.cs" />
     <Compile Include="AST\ICommand.cs" />
@@ -60,7 +61,11 @@
     <Compile Include="AST\Values\VInteger.cs" />
     <Compile Include="AST\Values\VNode.cs" />
     <Compile Include="AST\Values\VString.cs" />
+    <Compile Include="Parser\Expressions\ExpressionParser.cs" />
+    <Compile Include="Parser\Expressions\IValueParser.cs" />
     <Compile Include="Parser\Expressions\IOperationParser.cs" />
+    <Compile Include="Parser\Expressions\ValueParsers\IntAndStringParser.cs" />
+    <Compile Include="Parser\Expressions\ValueParsers\NodeNamesParser.cs" />
     <Compile Include="Parser\Syntax\ITokenParser.cs" />
     <Compile Include="Parser\Syntax\SyntaxParser.cs" />
     <Compile Include="Parser\Syntax\Token.cs" />
@@ -79,6 +84,8 @@
   <ItemGroup>
     <Content Include="Test.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Parser\Expressions\OperationParsers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

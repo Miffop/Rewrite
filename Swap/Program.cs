@@ -14,23 +14,37 @@ namespace Swap
     {
         static void Main(string[] args)
         {
-            var sp = new Parser.Syntax.SyntaxParser(new List<ITokenParser>() 
+            List<Token> tokens;
             {
+                var sp = new Parser.Syntax.SyntaxParser(new List<ITokenParser>()
+                {
                 new Parser.Syntax.TokenParsers.ArithmeticParser(),
                 new Parser.Syntax.TokenParsers.BraceParser(),
                 new Parser.Syntax.TokenParsers.IntParser(),
                 new Parser.Syntax.TokenParsers.SemiColonParser(),
                 new Parser.Syntax.TokenParsers.StringParser(),
                 new Parser.Syntax.TokenParsers.WordParser(),
-            });
-
-            string path = "./../../Test.txt";
-            string code = System.IO.File.ReadAllText(path);
-            List<Token> tokens = sp.Parse(code);
-            foreach(Token token in tokens)
-            {
-                Console.WriteLine(token.ToString());
+                });
+                string code = "((this))";
+                tokens = sp.Parse(code);
             }
+            IExpression result;
+            {
+                var ep = new Parser.Expressions.ExpressionParser(
+                    new List<Parser.Expressions.IOperationParser>()
+                    {
+
+                    },
+                    new List<Parser.Expressions.IValueParser>()
+                    {
+                        new Parser.Expressions.ValueParsers.IntAndStringParser(),
+                        new Parser.Expressions.ValueParsers.NodeNamesParser(),
+                    }
+                );
+                result = ep.Parse(tokens, 0, tokens.Count);
+            }
+            Console.WriteLine(result.Stringify());
+
             Console.ReadKey();
         }
     }
