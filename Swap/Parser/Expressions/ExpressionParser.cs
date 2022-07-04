@@ -59,7 +59,7 @@ namespace Swap.Parser.Expressions
                 }
                 else if (length == 0)
                 {
-                    return null;
+                    return new AST.Expressions.ValueExpression(new AST.Values.VNull());
                 }
                 else
                 {

@@ -26,7 +26,7 @@ namespace Swap
                 new Parser.Syntax.TokenParsers.WordParser(),
                 new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = "[`2`*2+\"2\"] * (4/3/2)";
+                string code = "-4+2 - null";
                 tokens = sp.Parse(code);
             }
             IExpression result;
@@ -40,6 +40,7 @@ namespace Swap
                     {
                         new Parser.Expressions.ValueParsers.IntAndStringParser(),
                         new Parser.Expressions.ValueParsers.NodeNamesParser(),
+                        new Parser.Expressions.ValueParsers.NullParser(),
                     }
                 );
                 result = ep.Parse(tokens, 0, tokens.Count);
