@@ -26,7 +26,8 @@ namespace Swap
                 new Parser.Syntax.TokenParsers.WordParser(),
                 new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = "(2+this-4+2-2+3-2+1+4)";
+                string code = "(this+2+(-1)*(2*`que`) +4)";
+                //string code = "4*2*this";
                 tokens = sp.Parse(code);
             }
             IExpression result;

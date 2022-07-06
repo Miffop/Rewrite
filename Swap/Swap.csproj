@@ -51,6 +51,7 @@
     <Compile Include="AST\Commands\SwapCommand.cs" />
     <Compile Include="AST\Context.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
+    <Compile Include="AST\Expressions\Math\ListNodeExtention.cs" />
     <Compile Include="AST\Expressions\Math\MulExpression.cs" />
     <Compile Include="AST\Expressions\Math\DivExpression.cs" />
     <Compile Include="AST\Expressions\Math\DiffExpression.cs" />

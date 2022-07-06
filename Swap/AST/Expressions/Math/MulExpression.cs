@@ -27,6 +27,11 @@ namespace Swap.AST.Expressions.Math
             }
             else if (A.GetString(out sA) && B.GetInteger(out iB))
             {
+                if (iB < 0)
+                {
+                    iB = -iB;
+                    sA = String.Join("", sA.Split().Reverse());
+                }
                 string res = "";
                 for (int i = 0; i < iB; i++)
                 {
@@ -36,6 +41,11 @@ namespace Swap.AST.Expressions.Math
             }
             else if (A.GetInteger(out iA) && B.GetString(out sB))
             {
+                if (iA < 0)
+                {
+                    iA = -iA;
+                    sB = String.Join("", sB.Reverse());
+                }
                 string res = "";
                 for (int i = 0; i < iA; i++)
                 {
@@ -75,10 +85,25 @@ namespace Swap.AST.Expressions.Math
             {
                 return new ValueExpression(Eval(null));
             }
-            else
+            else if(AExp is MulExpression && (BExp is IOptimizableExpression) && (BExp as IOptimizableExpression).IsConstant())
             {
-                return this;
+                MulExpression AMul = (AExp as MulExpression);
+                if((AMul.BExp is IOptimizableExpression) && (AMul.BExp as IOptimizableExpression).IsConstant())
+                {
+                    AMul.BExp = new MulExpression(AMul.BExp, this.BExp).Optimise();
+                    return AMul;
+                }
             }
+            else if (BExp is MulExpression && (AExp is IOptimizableExpression) && (AExp as IOptimizableExpression).IsConstant())
+            {
+                MulExpression BMul = (BExp as MulExpression);
+                if ((BMul.AExp is IOptimizableExpression) && (BMul.AExp as IOptimizableExpression).IsConstant())
+                {
+                    BMul.AExp = new MulExpression(BMul.AExp, this.AExp).Optimise();
+                    return BMul;
+                }
+            }
+            return this;
         }
     }
 }

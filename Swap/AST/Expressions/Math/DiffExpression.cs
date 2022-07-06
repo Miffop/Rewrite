@@ -27,11 +27,7 @@ namespace Swap.AST.Expressions.Math
             }
             else if(A.GetNode(out nA) && B.GetInteger(out iB))
             {
-                for(int i = 0; i < iB; i++)
-                {
-                    nA = nA.Previous;
-                }
-                return new Values.VNode(nA);
+                return new Values.VNode(nA.Move(-iB));
             }
             else
             {
@@ -65,7 +61,7 @@ namespace Swap.AST.Expressions.Math
             {
                 return new ValueExpression(Eval(null));
             }
-            else if (AExp is SumExpression)
+            else if (AExp is SumExpression && (BExp is IOptimizableExpression) && (BExp as IOptimizableExpression).IsConstant())
             {
                 SumExpression ASum = AExp as SumExpression;
                 if (ASum.BExp is IOptimizableExpression && (ASum.BExp as IOptimizableExpression).IsConstant())
@@ -74,7 +70,7 @@ namespace Swap.AST.Expressions.Math
                     return ASum;
                 }
             }
-            else if (AExp is DiffExpression)
+            else if (AExp is DiffExpression && (BExp is IOptimizableExpression) && (BExp as IOptimizableExpression).IsConstant())
             {
                 DiffExpression ADiff = AExp as DiffExpression;
                 if (ADiff.BExp is IOptimizableExpression && (ADiff.BExp as IOptimizableExpression).IsConstant())
