@@ -56,6 +56,7 @@
     <Compile Include="AST\Expressions\Math\DivExpression.cs" />
     <Compile Include="AST\Expressions\Math\DiffExpression.cs" />
     <Compile Include="AST\Expressions\Math\SumExpression.cs" />
+    <Compile Include="AST\Expressions\Reflection\SublineExpression.cs" />
     <Compile Include="AST\Expressions\RootNodeExpression.cs" />
     <Compile Include="AST\Expressions\ThisBlockExpression.cs" />
     <Compile Include="AST\Expressions\ValueExpression.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Parser\Expressions\IValueParser.cs" />
     <Compile Include="Parser\Expressions\IOperationParser.cs" />
     <Compile Include="Parser\Expressions\OperationParsers\MathOperationParser.cs" />
+    <Compile Include="Parser\Expressions\OperationParsers\ReflectionOperationParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\IntAndStringParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\NodeNamesParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\NullParser.cs" />

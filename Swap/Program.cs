@@ -18,15 +18,15 @@ namespace Swap
             {
                 var sp = new Parser.Syntax.SyntaxParser(new List<ITokenParser>()
                 {
-                new Parser.Syntax.TokenParsers.ArithmeticParser(),
-                new Parser.Syntax.TokenParsers.BraceParser(),
-                new Parser.Syntax.TokenParsers.IntParser(),
-                new Parser.Syntax.TokenParsers.SemiColonParser(),
-                new Parser.Syntax.TokenParsers.StringParser(),
-                new Parser.Syntax.TokenParsers.WordParser(),
-                new Parser.Syntax.TokenParsers.UStringParser(),
+                    new Parser.Syntax.TokenParsers.ArithmeticParser(),
+                    new Parser.Syntax.TokenParsers.BraceParser(),
+                    new Parser.Syntax.TokenParsers.IntParser(),
+                    new Parser.Syntax.TokenParsers.SemiColonParser(),
+                    new Parser.Syntax.TokenParsers.StringParser(),
+                    new Parser.Syntax.TokenParsers.WordParser(),
+                    new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = "(this+2+(-1)*(2*`que`) +4)";
+                string code = "(this+2+(-1)*(2*`que`)+4:2*3)";
                 //string code = "4*2*this";
                 tokens = sp.Parse(code);
             }
@@ -36,6 +36,7 @@ namespace Swap
                     new List<Parser.Expressions.IOperationParser>()
                     {
                         new Parser.Expressions.OperationParsers.MathOperationParser(),
+                        new Parser.Expressions.OperationParsers.ReflectionOperationParser(),
                     },
                     new List<Parser.Expressions.IValueParser>()
                     {
