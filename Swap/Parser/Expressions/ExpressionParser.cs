@@ -68,7 +68,7 @@ namespace Swap.Parser.Expressions
                     foreach(IValueParser p in Values)
                     {
                         IExpression result;
-                        if (p.Parse(code,index,length,out result))
+                        if (p.Parse(code,index,length,this,out result))
                         {
                             return result;
                         }

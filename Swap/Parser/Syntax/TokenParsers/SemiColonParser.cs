@@ -12,8 +12,9 @@ namespace Swap.Parser.Syntax.TokenParsers
         {
             length = 1;
             return 
-                code[index] == ';' || 
-                code[index] == '.' || 
+                code[index] == ';' ||
+                code[index] == '.' ||
+                code[index] == ',' ||
                 code[index] == ':';
         }
         public Token Parse(string code,int index)
@@ -24,6 +25,8 @@ namespace Swap.Parser.Syntax.TokenParsers
                     return new Token(";", "");
                 case '.':
                     return new Token(".", "");
+                case ',':
+                    return new Token(",", "");
                 case ':':
                     return new Token("Oper", ":");
                 default:

@@ -8,6 +8,6 @@ namespace Swap.Parser.Expressions
 {
     internal interface IValueParser
     {
-        bool Parse(List<Syntax.Token> code, int index, int length, out AST.IExpression val);
+        bool Parse(List<Syntax.Token> code, int index, int length, Expressions.ExpressionParser ep, out AST.IExpression val);
     }
 }

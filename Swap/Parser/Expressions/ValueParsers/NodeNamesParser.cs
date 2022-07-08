@@ -8,7 +8,7 @@ namespace Swap.Parser.Expressions.ValueParsers
 {
     internal class NodeNamesParser:IValueParser
     {
-        public bool Parse(List<Syntax.Token> code,int index,int length,out AST.IExpression val)
+        public bool Parse(List<Syntax.Token> code,int index,int length, Expressions.ExpressionParser ep, out AST.IExpression val)
         {
             if (length == 1 && code[index].Command=="Word")
             {

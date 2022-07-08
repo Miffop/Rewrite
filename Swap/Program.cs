@@ -26,7 +26,7 @@ namespace Swap
                     new Parser.Syntax.TokenParsers.WordParser(),
                     new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = System.IO.File.ReadAllText("./../../zProg/hello-world.txt");
+                string code = System.IO.File.ReadAllText("./../../zProg/Test.txt");
                 //string code = "4*2*this";
                 tokens = sp.Parse(code);
             }
@@ -43,6 +43,7 @@ namespace Swap
                         new Parser.Expressions.ValueParsers.IntAndStringParser(),
                         new Parser.Expressions.ValueParsers.NodeNamesParser(),
                         new Parser.Expressions.ValueParsers.NullParser(),
+                        new Parser.Expressions.ValueParsers.UnaryFunctionParser(),
                     },
                     true
                 );
@@ -50,9 +51,9 @@ namespace Swap
             {
                 var cp = new Parser.Commands.CommandParser(new List<Parser.Commands.ICommandParser>()
                 {
-                    new Parser.Commands.CommandParsers.IOCommandParser(),
+                    new Parser.Commands.CommandParsers.UnaryCommandParser(),
+                    new Parser.Commands.CommandParsers.ReflectionCommandParser(),
                 });
-                int result;
                 var com = cp.Parse(tokens, 0, tokens.Count, 1, ep);
                 
                 Console.WriteLine(com.Stringify());
