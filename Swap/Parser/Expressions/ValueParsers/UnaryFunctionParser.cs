@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Swap.Parser.Expressions.ValueParsers
 {
-    internal class UnaryFunctionParser:IValueParser
+    internal class UnaryFunctionParser : IValueParser
     {
-        public bool Parse(List<Syntax.Token> code,int index,int length, Expressions.ExpressionParser ep, out AST.IExpression exp)
+        public bool Parse(List<Syntax.Token> code, int index, int length, Expressions.ExpressionParser ep, out AST.IExpression exp)
         {
             if (code[index].Command == "Word")
             {
-                if(
-                    code[index].Argument=="Line" ||
-                    code[index].Argument=="Value"
+                if (
+                    code[index].Argument == "Line" ||
+                    code[index].Argument == "Value" ||
+                    code[index].Argument == "Int"
                     )
                 {
                     if (code[index + 1].Command != "BraceOpen")
@@ -33,6 +34,9 @@ namespace Swap.Parser.Expressions.ValueParsers
                             break;
                         case "Value":
                             exp = new AST.Expressions.Reflection.GetValueExpression(Base);
+                            break;
+                        case "Int":
+                            exp = new AST.Expressions.Conversion.ToInt(Base);
                             break;
                         default:
                             throw new Exception("This must be a bug");

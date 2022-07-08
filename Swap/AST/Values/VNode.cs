@@ -16,17 +16,17 @@ namespace Swap.AST.Values
         public bool GetInteger(out int i)
         {
             i = 0;
-            return false;
+            return this.node==null;
         }
         public bool GetString(out string s)
         {
-            s = null;
-            return false;
+            s = "";
+            return this.node == null;
         }
         public bool GetNode(out LinkedListNode<ICommand> n)
         {
             n = this.node;
-            return true;
+            return n!=null;
         }
         public string Stringify()
         {

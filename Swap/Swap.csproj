@@ -52,6 +52,7 @@
     <Compile Include="AST\Commands\StoreCommand.cs" />
     <Compile Include="AST\Commands\SwapCommand.cs" />
     <Compile Include="AST\Context.cs" />
+    <Compile Include="AST\Expressions\Conversion\ToInt.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
     <Compile Include="AST\Expressions\Math\ListNodeExtention.cs" />
     <Compile Include="AST\Expressions\Math\MulExpression.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="AST\Values\VNull.cs" />
     <Compile Include="AST\Values\VInteger.cs" />
     <Compile Include="AST\Values\VNode.cs" />
-    <Compile Include="AST\Values\VUString.cs" />
     <Compile Include="AST\Values\VString.cs" />
     <Compile Include="Parser\Commands\CommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\UnaryCommandParser.cs" />
@@ -94,7 +94,6 @@
     <Compile Include="Parser\Syntax\TokenParsers\BraceParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\IntParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\SemiColonParser.cs" />
-    <Compile Include="Parser\Syntax\TokenParsers\UStringParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\StringParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\WordParser.cs" />
     <Compile Include="Program.cs" />

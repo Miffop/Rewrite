@@ -15,7 +15,8 @@ namespace Swap.AST.Values
         }
         public bool GetInteger(out int i)
         {
-            return Int32.TryParse(str, out i);
+            i = 0;
+            return false;
         }
         public bool GetString(out string s)
         {

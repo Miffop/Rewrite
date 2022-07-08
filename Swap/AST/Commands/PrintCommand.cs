@@ -36,7 +36,7 @@ namespace Swap.AST.Commands
             }
             else
             {
-                throw new Exception("Address expected");
+                throw new Exception($"Address expected: {this.Stringify()}");
             }
             return Parent.Next;
         }

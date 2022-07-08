@@ -19,8 +19,11 @@ namespace Swap.AST.Commands
             LinkedListNode<ICommand> com;
             if(Address.Eval(c).GetNode(out com))
             {
+                /*
                 com.Value = new NoCommand(com.Value.Line);
                 com.Value.Parent = com;
+                */
+                com.List.Remove(com);
                 return Parent.Next;
             }
             throw new Exception($"Address expected {this.Stringify()}");

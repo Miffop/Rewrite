@@ -24,7 +24,6 @@ namespace Swap
                     new Parser.Syntax.TokenParsers.SemiColonParser(),
                     new Parser.Syntax.TokenParsers.StringParser(),
                     new Parser.Syntax.TokenParsers.WordParser(),
-                    new Parser.Syntax.TokenParsers.UStringParser(),
                 });
                 string code = System.IO.File.ReadAllText("./../../zProg/Test.txt");
                 //string code = "4*2*this";

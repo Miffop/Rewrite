@@ -70,6 +70,10 @@ namespace Swap.Parser.Expressions
                         IExpression result;
                         if (p.Parse(code,index,length,this,out result))
                         {
+                            if(result is IOptimizableExpression && Optimization)
+                            {
+                                result = (result as IOptimizableExpression).Optimise();
+                            }
                             return result;
                         }
                     }
