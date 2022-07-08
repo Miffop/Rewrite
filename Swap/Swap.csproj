@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AST\Commands\DeleteCommand.cs" />
     <Compile Include="AST\Commands\GoToCommand.cs" />
+    <Compile Include="AST\Commands\HaltCommand.cs" />
     <Compile Include="AST\Commands\InputCommand.cs" />
     <Compile Include="AST\Commands\NoCommand.cs" />
     <Compile Include="AST\Commands\PrintCommand.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="AST\Values\VNode.cs" />
     <Compile Include="AST\Values\VString.cs" />
     <Compile Include="Parser\Commands\CommandParser.cs" />
+    <Compile Include="Parser\Commands\CommandParsers\EmptyCommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\UnaryCommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\ReflectionCommandParser.cs" />
     <Compile Include="Parser\Commands\ICommandParser.cs" />

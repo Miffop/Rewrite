@@ -52,6 +52,7 @@ namespace Swap
                 {
                     new Parser.Commands.CommandParsers.UnaryCommandParser(),
                     new Parser.Commands.CommandParsers.ReflectionCommandParser(),
+                    new Parser.Commands.CommandParsers.EmptyCommandParser(),
                 });
                 var com = cp.Parse(tokens, 0, tokens.Count, 1, ep);
                 
