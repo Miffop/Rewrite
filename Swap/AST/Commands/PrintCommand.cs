@@ -31,7 +31,7 @@ namespace Swap.AST.Commands
                 }
                 else
                 {
-                    Console.Write(addr.Value.Stringify());
+                    Console.WriteLine(addr.Value.Stringify());
                 }
             }
             else
