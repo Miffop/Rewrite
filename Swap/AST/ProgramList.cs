@@ -77,7 +77,7 @@ namespace Swap.AST
                 }
                 CurrentNode = CurrentNode.Next;
             }
-            return null;
+            return AddCommand(new Commands.NoCommand(i));
         }
         public override string Stringify()
         {

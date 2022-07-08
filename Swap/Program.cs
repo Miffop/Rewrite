@@ -26,13 +26,13 @@ namespace Swap
                     new Parser.Syntax.TokenParsers.WordParser(),
                     new Parser.Syntax.TokenParsers.UStringParser(),
                 });
-                string code = "(this+2+(-1)*(2*`que`)+4:2*3)";
+                string code = System.IO.File.ReadAllText("./../../zProg/hello-world.txt");
                 //string code = "4*2*this";
                 tokens = sp.Parse(code);
             }
-            IExpression result;
+            Parser.Expressions.ExpressionParser ep;
             {
-                var ep = new Parser.Expressions.ExpressionParser(
+                ep = new Parser.Expressions.ExpressionParser(
                     new List<Parser.Expressions.IOperationParser>()
                     {
                         new Parser.Expressions.OperationParsers.MathOperationParser(),
@@ -46,9 +46,21 @@ namespace Swap
                     },
                     true
                 );
-                result = ep.Parse(tokens, 0, tokens.Count);
             }
-            Console.WriteLine(result.Stringify());
+            {
+                var cp = new Parser.Commands.CommandParser(new List<Parser.Commands.ICommandParser>()
+                {
+                    new Parser.Commands.CommandParsers.IOCommandParser(),
+                });
+                int result;
+                var com = cp.Parse(tokens, 0, tokens.Count, 1, ep);
+                
+                Console.WriteLine(com.Stringify());
+                
+                LinkedListNode<ICommand> rootNode = new LinkedListNode<ICommand>(com);
+                com.Parent = rootNode;
+                com.Execute(new Context(com, com));
+            }
             //Console.WriteLine(result.Eval(null).Stringify());
 
             Console.ReadKey();

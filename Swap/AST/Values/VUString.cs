@@ -30,7 +30,7 @@ namespace Swap.AST.Values
         }
         public string Stringify()
         {
-            return $"`{str.Replace("\\", "\\b").Replace("\"", "\\q")}`";
+            return $"`{str.Replace("\\", "\\b").Replace("\"", "\\q").Replace("\n", "\\n")}`";
         }
     }
 }

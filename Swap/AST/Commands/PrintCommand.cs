@@ -19,7 +19,20 @@ namespace Swap.AST.Commands
             LinkedListNode<ICommand> addr;
             if (Address.Eval(c).GetNode(out addr))
             {
-                Console.WriteLine(addr.Value.Stringify());
+                if(addr.Value is StoreCommand)
+                {
+                    StoreCommand store=addr.Value as StoreCommand;
+                    string s;
+                    if(!store.Data.GetString(out s))
+                    {
+                        s = store.Stringify();
+                    }
+                    Console.Write(s);
+                }
+                else
+                {
+                    Console.Write(addr.Value.Stringify());
+                }
             }
             else
             {

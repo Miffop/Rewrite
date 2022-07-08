@@ -29,7 +29,7 @@ namespace Swap.Parser.Syntax.TokenParsers
             {
                 s += code[index++];
             }
-            return new Token("String", s.Replace("\\q", "\"").Replace("\\b", "\\"));
+            return new Token("String", s.Replace("\\q", "\"").Replace("\\n", "\n").Replace("\\b", "\\"));
         }
     }
 }

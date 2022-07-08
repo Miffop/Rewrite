@@ -20,6 +20,7 @@ namespace Swap.AST.Commands
             if (Address.Eval(c).GetNode(out addr))
             {
                 addr.Value = new StoreCommand(new Values.VString(Console.ReadLine()), addr.Value.Line);
+                addr.Value.Parent = addr;
             }
             else
             {
