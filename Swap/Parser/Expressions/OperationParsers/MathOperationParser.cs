@@ -18,6 +18,7 @@ namespace Swap.Parser.Expressions.OperationParsers
                     return true;
                 case "*":
                 case "/":
+                case "%":
                     priority = 1;
                     return true;
             }
@@ -36,6 +37,8 @@ namespace Swap.Parser.Expressions.OperationParsers
                     return new AST.Expressions.Math.MulExpression(left, right);
                 case "/":
                     return new AST.Expressions.Math.DivExpression(left, right);
+                case "%":
+                    return new AST.Expressions.Math.ModExpression(left, right);
                 default:
                     throw new Exception($"Cannot parse operation: '{operation}'");
             }

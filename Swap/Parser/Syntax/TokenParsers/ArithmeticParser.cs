@@ -15,7 +15,8 @@ namespace Swap.Parser.Syntax.TokenParsers
                 code[index] == '+' ||
                 code[index] == '-' ||
                 code[index] == '*' ||
-                code[index] == '/';
+                code[index] == '/' ||
+                code[index] == '%';
 
         }
         public Token Parse(string code,int index)
@@ -26,6 +27,7 @@ namespace Swap.Parser.Syntax.TokenParsers
                 case '-': return new Token("Oper", "-");
                 case '*': return new Token("Oper", "*");
                 case '/': return new Token("Oper", "/");
+                case '%': return new Token("Oper", "%");
                 default:
                     throw new Exception();
             }

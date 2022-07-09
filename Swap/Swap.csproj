@@ -61,6 +61,7 @@
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\NotEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\EqualExpression.cs" />
+    <Compile Include="AST\Expressions\Math\ModExpression.cs" />
     <Compile Include="AST\Expressions\Math\ListNodeExtention.cs" />
     <Compile Include="AST\Expressions\Math\MulExpression.cs" />
     <Compile Include="AST\Expressions\Math\DivExpression.cs" />
