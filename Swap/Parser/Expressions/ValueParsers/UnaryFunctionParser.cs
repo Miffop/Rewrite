@@ -36,7 +36,7 @@ namespace Swap.Parser.Expressions.ValueParsers
                             exp = new AST.Expressions.Reflection.GetValueExpression(Base);
                             break;
                         case "Int":
-                            exp = new AST.Expressions.Conversion.ToInt(Base);
+                            exp = new AST.Expressions.Conversion.ToIntExpression(Base);
                             break;
                         default:
                             throw new Exception("This must be a bug");

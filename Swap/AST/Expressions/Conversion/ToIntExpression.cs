@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Conversion
 {
-    internal class ToInt:IOptimizableExpression
+    internal class ToIntExpression:IOptimizableExpression
     {
         IExpression Exp;
-        public ToInt(IExpression exp)
+        public ToIntExpression(IExpression exp)
         {
             this.Exp = exp;
         }
@@ -41,7 +41,11 @@ namespace Swap.AST.Expressions.Conversion
         }
         public IExpression Optimise()
         {
-            if(Exp is IOptimizableExpression && (Exp as IOptimizableExpression).IsConstant())
+            if(Exp is IOptimizableExpression)
+            {
+                Exp = (Exp as IOptimizableExpression).Optimise();
+            }
+            if(IsConstant())
             {
                 return new ValueExpression(this.Eval(null));
             }

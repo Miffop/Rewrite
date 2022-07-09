@@ -24,6 +24,7 @@ namespace Swap
                     new Parser.Syntax.TokenParsers.SemiColonParser(),
                     new Parser.Syntax.TokenParsers.StringParser(),
                     new Parser.Syntax.TokenParsers.WordParser(),
+                    new Parser.Syntax.TokenParsers.ComparisonParser(),
                 });
                 string code = System.IO.File.ReadAllText("./../../zProg/Test.txt");
                 //string code = "4*2*this";
@@ -36,6 +37,7 @@ namespace Swap
                     {
                         new Parser.Expressions.OperationParsers.MathOperationParser(),
                         new Parser.Expressions.OperationParsers.ReflectionOperationParser(),
+                        new Parser.Expressions.OperationParsers.ComparisonOperationParser(),
                     },
                     new List<Parser.Expressions.IValueParser>()
                     {
@@ -61,6 +63,8 @@ namespace Swap
                 LinkedListNode<ICommand> rootNode = new LinkedListNode<ICommand>(com);
                 com.Parent = rootNode;
                 com.Execute(new Context(com, com));
+                
+
             }
             //Console.WriteLine(result.Eval(null).Stringify());
 

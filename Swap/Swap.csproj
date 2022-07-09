@@ -53,8 +53,14 @@
     <Compile Include="AST\Commands\StoreCommand.cs" />
     <Compile Include="AST\Commands\SwapCommand.cs" />
     <Compile Include="AST\Context.cs" />
-    <Compile Include="AST\Expressions\Conversion\ToInt.cs" />
+    <Compile Include="AST\Expressions\Comparison\GreaterEqualExpression.cs" />
+    <Compile Include="AST\Expressions\Comparison\LessEqualExpression.cs" />
+    <Compile Include="AST\Expressions\Comparison\LessExpression.cs" />
+    <Compile Include="AST\Expressions\Comparison\GreaterExpression.cs" />
+    <Compile Include="AST\Expressions\Conversion\ToIntExpression.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
+    <Compile Include="AST\Expressions\Comparison\NotEqualExpression.cs" />
+    <Compile Include="AST\Expressions\Comparison\EqualExpression.cs" />
     <Compile Include="AST\Expressions\Math\ListNodeExtention.cs" />
     <Compile Include="AST\Expressions\Math\MulExpression.cs" />
     <Compile Include="AST\Expressions\Math\DivExpression.cs" />
@@ -83,6 +89,7 @@
     <Compile Include="Parser\Expressions\ExpressionParser.cs" />
     <Compile Include="Parser\Expressions\IValueParser.cs" />
     <Compile Include="Parser\Expressions\IOperationParser.cs" />
+    <Compile Include="Parser\Expressions\OperationParsers\ComparisonOperationParser.cs" />
     <Compile Include="Parser\Expressions\OperationParsers\MathOperationParser.cs" />
     <Compile Include="Parser\Expressions\OperationParsers\ReflectionOperationParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\UnaryFunctionParser.cs" />
@@ -94,6 +101,7 @@
     <Compile Include="Parser\Syntax\Token.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\ArithmeticParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\BraceParser.cs" />
+    <Compile Include="Parser\Syntax\TokenParsers\ComparisonParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\IntParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\SemiColonParser.cs" />
     <Compile Include="Parser\Syntax\TokenParsers\StringParser.cs" />
@@ -107,8 +115,9 @@
   <ItemGroup>
     <Content Include="Test.txt" />
     <Content Include="zProg\cat.txt" />
-    <Content Include="zProg\hello-world.txt" />
     <Content Include="zProg\Test.txt" />
+    <Content Include="zProg\hello-world.txt" />
+    <Content Include="zProg\Count.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
