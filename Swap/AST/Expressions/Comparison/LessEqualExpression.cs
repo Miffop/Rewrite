@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Comparison
 {
-    internal class LessEqualExpression:IOptimizableExpression,IBinaryExpression
+    internal class LessEqualExpression:IOptimizableExpression,IBinaryOperation
     {
         public IExpression AExp { get; set; }
         public IExpression BExp { get; set; }

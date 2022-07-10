@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Commands
 {
-    internal class GoToCommand:ICommand
+    internal class GoToCommand:ICommand,IUnaryOperation
     {
-        IExpression ToExpression;
+        public IExpression AExp { get; set; }//Address
         public GoToCommand(IExpression to,int ln)
         {
-            this.ToExpression = to;
+            this.AExp = to;
             this.Line = ln;
         }
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
             LinkedListNode<ICommand> To;
-            if (ToExpression.Eval(c).GetNode(out To))
+            if (AExp.Eval(c).GetNode(out To))
             {
                 return To;
             }
@@ -28,7 +28,7 @@ namespace Swap.AST.Commands
         }
         public override string Stringify()
         {
-            return $"GoTo({ToExpression.Stringify()});";
+            return $"GoTo({AExp.Stringify()});";
         }
     }
 }

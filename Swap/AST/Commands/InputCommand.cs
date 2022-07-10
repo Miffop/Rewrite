@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Commands
 {
-    internal class InputCommand:ICommand
+    internal class InputCommand:ICommand,IUnaryOperation
     {
-        IExpression Address;
+        public IExpression AExp { get; set; }//Address
         public InputCommand(IExpression address,int ln)
         {
-            this.Address = address;
+            this.AExp = address;
             this.Line = ln;
         }
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
             LinkedListNode<ICommand> addr;
-            if (Address.Eval(c).GetNode(out addr))
+            if (AExp.Eval(c).GetNode(out addr))
             {
                 addr.Value = new StoreCommand(new Values.VString(Console.ReadLine()), addr.Value.Line);
                 addr.Value.Parent = addr;
@@ -30,7 +30,7 @@ namespace Swap.AST.Commands
         }
         public override string Stringify()
         {
-            return $"Input({Address.Stringify()})";
+            return $"Input({AExp.Stringify()})";
         }
     }
 }

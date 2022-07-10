@@ -28,9 +28,14 @@ namespace Swap.AST.Values
             n = this.node;
             return n!=null;
         }
+        public bool GetExpression(out IExpression e)
+        {
+            e = null;
+            return false;
+        }
         public string Stringify()
         {
-            return $"<Address:{node.Value.Line}>";
+            return $"<Line:{node.Value.Line}.{node.Value.Stringify()}>";
         }
     }
 }

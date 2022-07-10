@@ -46,7 +46,15 @@ namespace Swap.Parser.Commands
                         return result;
                     }
                 }
-                return new AST.Commands.StoreCommand(expHandler.Parse(code, index + 2, length - 3).Eval(null), Line);
+                AST.IExpression exp = expHandler.Parse(code, index + 2, length - 3);
+                if(exp is AST.IOptimizableExpression && (exp as AST.IOptimizableExpression).IsConstant())
+                {
+                    return new AST.Commands.StoreCommand(exp.Eval(null), Line);
+                }
+                else
+                {
+                    return new AST.Commands.StoreCommand(new AST.Values.VExpression(exp), Line);
+                }
             }
         }
     }

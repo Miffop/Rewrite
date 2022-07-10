@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Conversion
 {
-    internal class ToIntExpression:IOptimizableExpression,IUnaryExpression
+    internal class ToIntExpression:IOptimizableExpression,IUnaryOperation
     {
         public IExpression AExp { get; set; }
         public ToIntExpression(IExpression exp)

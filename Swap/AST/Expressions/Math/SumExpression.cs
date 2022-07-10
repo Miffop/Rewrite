@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class SumExpression : IOptimizableExpression,IBinaryExpression
+    internal class SumExpression : IOptimizableExpression,IBinaryOperation
     {
         public IExpression AExp { get; set; }
         public IExpression BExp { get; set; }

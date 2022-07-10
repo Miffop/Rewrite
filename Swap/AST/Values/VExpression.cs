@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Values
 {
-    internal class VNull:IValue
+    internal class VExpression:IValue
     {
+        IExpression exp;
+        public VExpression(IExpression e)
+        {
+            this.exp = e;
+        }
         public bool GetInteger(out int i)
         {
             i = 0;
-            return true;
+            return false;
         }
         public bool GetString(out string s)
         {
-            s = "";
-            return true;
+            s = null;
+            return false;
         }
         public bool GetNode(out LinkedListNode<ICommand> n)
         {
@@ -25,12 +30,12 @@ namespace Swap.AST.Values
         }
         public bool GetExpression(out IExpression e)
         {
-            e = null;
-            return false;
+            e = this.exp;
+            return true;
         }
         public string Stringify()
         {
-            return "null";
+            return exp.Stringify();
         }
     }
 }

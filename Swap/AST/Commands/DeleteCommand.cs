@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Commands
 {
-    internal class DeleteCommand:ICommand
+    internal class DeleteCommand:ICommand,IUnaryOperation
     {
-        IExpression Address;
+        public IExpression AExp { get; set; }//Address
         public DeleteCommand(IExpression addr,int ln)
         {
-            this.Address = addr;
+            this.AExp = addr;
             this.Line = ln;
         }
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
             LinkedListNode<ICommand> com;
-            if(Address.Eval(c).GetNode(out com))
+            if(AExp.Eval(c).GetNode(out com))
             {
                 /*
                 com.Value = new NoCommand(com.Value.Line);
@@ -30,7 +30,7 @@ namespace Swap.AST.Commands
         }
         public override string Stringify()
         {
-            return $"Delete({Address.Stringify()});";
+            return $"Delete({AExp.Stringify()});";
         }
     }
 

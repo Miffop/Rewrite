@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Expressions
+namespace Swap.AST
 {
-    internal interface IUnaryExpression:IExpression
+    internal interface IUnaryOperation
     {
         IExpression AExp { get; set; }
     }

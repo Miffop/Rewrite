@@ -6,23 +6,26 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Commands
 {
-    internal class PrintCommand:ICommand
+    internal class PrintCommand:ICommand,IUnaryOperation
     {
-        IExpression Address;
+        public IExpression AExp { get; set; }
         public PrintCommand(IExpression address,int ln)
         {
-            this.Address = address;
+            this.AExp = address;
             this.Line = ln;
         }
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
+            IValue vA = AExp.Eval(c);
+            int i;
+            string s;
+            IExpression e;
             LinkedListNode<ICommand> addr;
-            if (Address.Eval(c).GetNode(out addr))
+            if (vA.GetNode(out addr))
             {
                 if(addr.Value is StoreCommand)
                 {
                     StoreCommand store=addr.Value as StoreCommand;
-                    string s;
                     if(!store.Data.GetString(out s))
                     {
                         s = store.Stringify();
@@ -34,6 +37,18 @@ namespace Swap.AST.Commands
                     Console.WriteLine(addr.Value.Stringify());
                 }
             }
+            else if(vA.GetExpression(out e))
+            {
+                Console.WriteLine(e.Stringify());
+            }
+            else if (vA.GetInteger(out i))
+            {
+                Console.Write(i);
+            }
+            else if (vA.GetString(out s))
+            {
+                Console.Write(s);
+            }
             else
             {
                 throw new Exception($"Address expected: {this.Stringify()}");
@@ -42,7 +57,7 @@ namespace Swap.AST.Commands
         }
         public override string Stringify()
         {
-            return $"Print({Address.Stringify()});";
+            return $"Print({AExp.Stringify()});";
         }
     }
 }

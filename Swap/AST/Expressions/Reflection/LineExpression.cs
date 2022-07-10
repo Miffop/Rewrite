@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Reflection
 {
-    internal class LineExpression:IExpression,IUnaryExpression
+    internal class LineExpression:IExpression,IUnaryOperation
     {
         public IExpression AExp { get; set; }
         public LineExpression(IExpression node)

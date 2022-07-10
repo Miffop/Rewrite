@@ -28,6 +28,11 @@ namespace Swap.AST.Values
             node = null;
             return false;
         }
+        public bool GetExpression(out IExpression e)
+        {
+            e = null;
+            return false;
+        }
         public string Stringify()
         {
             return $"{n}";

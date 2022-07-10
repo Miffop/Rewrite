@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Commands
 {
-    internal class SwapCommand:ICommand
+    internal class SwapCommand:ICommand,IBinaryOperation
     {
-        IExpression LineAExpression;
-        IExpression LineBExpression;
+        public IExpression AExp { get; set; }
+        public IExpression BExp { get; set; }
 
         public SwapCommand(IExpression A,IExpression B,int ln)
         {
-            this.LineAExpression = A;
-            this.LineBExpression = B;
+            this.AExp = A;
+            this.AExp = B;
             this.Line = ln;
         }
 
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
-            IValue lineA = LineAExpression.Eval(c);
-            IValue lineB = LineBExpression.Eval(c);
+            IValue lineA = AExp.Eval(c);
+            IValue lineB = AExp.Eval(c);
             
             LinkedListNode<ICommand> A, B;
             
@@ -50,7 +50,7 @@ namespace Swap.AST.Commands
         }
         public override string Stringify()
         {
-            return $"Swap({this.LineAExpression.Stringify()},{this.LineBExpression.Stringify()});";
+            return $"Swap({this.AExp.Stringify()},{this.AExp.Stringify()});";
         }
     }
 

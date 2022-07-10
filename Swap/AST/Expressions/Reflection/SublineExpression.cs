@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Reflection
 {
-    internal class SublineExpression:IExpression,IBinaryExpression
+    internal class SublineExpression:IExpression,IBinaryOperation
     {
         public IExpression AExp { get; set; }
         public IExpression BExp { get; set; }
@@ -18,13 +18,38 @@ namespace Swap.AST.Expressions.Reflection
 
         public IValue Eval(Context c)
         {
+            IValue vA = AExp.Eval(c);
+            IValue vB = BExp.Eval(c);
             LinkedListNode<ICommand> nA;
+            IExpression eA;
             int iB;
-            if(AExp.Eval(c).GetNode(out nA) && BExp.Eval(c).GetInteger(out iB))
+            if(vA.GetNode(out nA) && vB.GetInteger(out iB))
             {
-                return new Values.VNode((nA.Value as ProgramList).Find(iB));
+                if(nA.Value is ProgramList)
+                {
+                    return new Values.VNode((nA.Value as ProgramList).Find(iB));
+                }
+                else if(nA.Value is IUnaryOperation && iB==0)
+                {
+                    return new Values.VExpression((nA.Value as IUnaryOperation).AExp);
+                }
+                else if(nA.Value is IBinaryOperation && iB == 1)
+                {
+                    return new Values.VExpression((nA.Value as IBinaryOperation).BExp);
+                }
             }
-            throw new Exception($"Address and Integer expected: {this.Stringify()}");
+            if(vA.GetExpression(out eA) && vB.GetInteger(out iB))
+            {
+                if(eA is IUnaryOperation && iB == 0)
+                {
+                    return new Values.VExpression((eA as IUnaryOperation).AExp);
+                }
+                else if(eA is IBinaryOperation && iB == 1)
+                {
+                    return new Values.VExpression((eA as IBinaryOperation).BExp);
+                }
+            }
+            throw new Exception($"Cannot perform: {this.Stringify()}");
         }
         public string Stringify()
         {

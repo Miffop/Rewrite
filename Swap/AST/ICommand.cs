@@ -9,7 +9,6 @@ namespace Swap.AST
     internal abstract class ICommand
     {
         public int Line { get; set; }
-        
         public LinkedListNode<ICommand> Parent { get; set; }
 
         public LinkedListNode<ICommand> Execute(Context c)

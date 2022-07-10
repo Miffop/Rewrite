@@ -8,18 +8,18 @@ namespace Swap.AST.Expressions
 {
     internal class ValueExpression:IOptimizableExpression
     {
-        IValue val;
+        public IValue Value { get; set; }
         public ValueExpression(IValue v)
         {
-            this.val = v;
+            this.Value = v;
         }
         public IValue Eval(Context c)
         {
-            return val;
+            return Value;
         }
         public string Stringify()
         {
-            return $"{val.Stringify()}";
+            return $"{Value.Stringify()}";
         }
 
         public bool IsConstant()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Comparison
 {
-    internal class EqualExpression:IOptimizableExpression,IBinaryExpression
+    internal class EqualExpression:IOptimizableExpression,IBinaryOperation
     {
         public IExpression AExp { get; set; }
         public IExpression BExp { get; set; }
@@ -21,6 +21,7 @@ namespace Swap.AST.Expressions.Comparison
             IValue vB = BExp.Eval(c);
             int iA, iB;
             string sA, sB;
+            IExpression eA, eB;
             LinkedListNode<ICommand> nA, nB;
             if(vA.GetInteger(out iA) && vB.GetInteger(out iB))
             {
@@ -33,6 +34,10 @@ namespace Swap.AST.Expressions.Comparison
             if(vA.GetNode(out nA) && vB.GetNode(out nB))
             {
                 return new Values.VInteger(nA == nB ? 1 : 0);
+            }
+            if(vA.GetExpression(out eA) && vB.GetExpression(out eB))
+            {
+                return new Values.VInteger(eA == eB ? 1 : 0);
             }
             throw new Exception($"Cannot perform: {this.Stringify()}");
         }

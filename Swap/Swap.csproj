@@ -61,6 +61,8 @@
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\NotEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\EqualExpression.cs" />
+    <Compile Include="AST\IBinaryOperation.cs" />
+    <Compile Include="AST\IUnaryOperation.cs" />
     <Compile Include="AST\Expressions\Math\ModExpression.cs" />
     <Compile Include="AST\Expressions\Math\ListNodeExtention.cs" />
     <Compile Include="AST\Expressions\Math\MulExpression.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="AST\IOptimizableExpression.cs" />
     <Compile Include="AST\IValue.cs" />
     <Compile Include="AST\ProgramList.cs" />
+    <Compile Include="AST\Values\VExpression.cs" />
     <Compile Include="AST\Values\VNull.cs" />
     <Compile Include="AST\Values\VInteger.cs" />
     <Compile Include="AST\Values\VNode.cs" />

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Expressions
+namespace Swap.AST
 {
-    internal interface IBinaryExpression:IExpression
+    internal interface IBinaryOperation:IUnaryOperation
     {
-        IExpression AExp { get; set; }
         IExpression BExp { get; set; }
     }
 }

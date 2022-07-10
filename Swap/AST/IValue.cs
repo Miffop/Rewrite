@@ -11,6 +11,7 @@ namespace Swap.AST
         bool GetInteger(out int i);
         bool GetString(out string s);
         bool GetNode(out LinkedListNode<ICommand> n);
+        bool GetExpression(out IExpression e);
         string Stringify();
     }
 }

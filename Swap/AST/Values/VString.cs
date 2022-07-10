@@ -28,6 +28,11 @@ namespace Swap.AST.Values
             n = null;
             return false;
         }
+        public bool GetExpression(out IExpression e)
+        {
+            e = null;
+            return false;
+        }
         public string Stringify()
         {
             return $"\"{str.Replace("\\", "\\b").Replace("\"", "\\q").Replace("\n","\\n")}\"";
