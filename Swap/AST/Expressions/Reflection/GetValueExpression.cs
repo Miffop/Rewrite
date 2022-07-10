@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Reflection
 {
-    internal class GetValueExpression:IExpression
+    internal class GetValueExpression:IExpression,IUnaryExpression
     {
-        IExpression Address;
+        public IExpression AExp { get; set; }
         public GetValueExpression(IExpression addr)
         {
-            this.Address = addr;
+            this.AExp = addr;
         }
         public IValue Eval(Context c)
         {
             LinkedListNode<ICommand> node;
-            if(Address.Eval(c).GetNode(out node))
+            if(AExp.Eval(c).GetNode(out node))
             {
                 if(node.Value is Commands.StoreCommand)
                 {
@@ -28,7 +28,7 @@ namespace Swap.AST.Expressions.Reflection
         }
         public string Stringify()
         {
-            return $"Value({Address.Stringify()})";
+            return $"Value({AExp.Stringify()})";
         }
     }
 }

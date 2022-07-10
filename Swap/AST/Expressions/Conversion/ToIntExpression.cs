@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Conversion
 {
-    internal class ToIntExpression:IOptimizableExpression
+    internal class ToIntExpression:IOptimizableExpression,IUnaryExpression
     {
-        IExpression Exp;
+        public IExpression AExp { get; set; }
         public ToIntExpression(IExpression exp)
         {
-            this.Exp = exp;
+            this.AExp = exp;
         }
         public IValue Eval(Context c)
         {
             int result;
-            IValue val = Exp.Eval(c);
+            IValue val = AExp.Eval(c);
             if(val.GetInteger(out result))
             {
                 return new Values.VInteger(result);
@@ -29,21 +29,21 @@ namespace Swap.AST.Expressions.Conversion
                     return new Values.VInteger(result);
                 }
             }
-            throw new Exception($"Cannot convert to integer: {Exp.Stringify()}");
+            throw new Exception($"Cannot convert to integer: {AExp.Stringify()}");
         }
         public string Stringify()
         {
-            return $"Int({Exp.Stringify()})";
+            return $"Int({AExp.Stringify()})";
         }
         public bool IsConstant()
         {
-            return (Exp is IOptimizableExpression) && (Exp as IOptimizableExpression).IsConstant();
+            return (AExp is IOptimizableExpression) && (AExp as IOptimizableExpression).IsConstant();
         }
         public IExpression Optimise()
         {
-            if(Exp is IOptimizableExpression)
+            if(AExp is IOptimizableExpression)
             {
-                Exp = (Exp as IOptimizableExpression).Optimise();
+                AExp = (AExp as IOptimizableExpression).Optimise();
             }
             if(IsConstant())
             {

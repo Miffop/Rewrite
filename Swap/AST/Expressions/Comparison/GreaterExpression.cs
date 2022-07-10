@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Comparison
 {
-    internal class GreaterExpression:IOptimizableExpression
+    internal class GreaterExpression:IOptimizableExpression,IBinaryExpression
     {
-        IExpression AExp, BExp;
+        public IExpression AExp { get; set; }
+        public IExpression BExp { get; set; }
         public GreaterExpression(IExpression a,IExpression b)
         {
             this.AExp = a;

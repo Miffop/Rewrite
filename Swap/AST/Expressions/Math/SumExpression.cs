@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class SumExpression : IOptimizableExpression
+    internal class SumExpression : IOptimizableExpression,IBinaryExpression
     {
-        public IExpression AExp, BExp;
+        public IExpression AExp { get; set; }
+        public IExpression BExp { get; set; }
         public SumExpression(IExpression a, IExpression b)
         {
             this.AExp = a;

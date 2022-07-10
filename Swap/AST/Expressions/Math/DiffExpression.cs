@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class DiffExpression: IOptimizableExpression
+    internal class DiffExpression: IOptimizableExpression,IBinaryExpression
     {
-        public IExpression AExp, BExp;
+        public IExpression AExp { get; set; }
+        public IExpression BExp { get; set; }
         public DiffExpression(IExpression a,IExpression b)
         {
             this.AExp = a;

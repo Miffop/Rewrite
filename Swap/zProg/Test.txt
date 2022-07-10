@@ -1,5 +1,4 @@
 ﻿
-
 1.Set(current,current==root:1);
 2.Set(current,current!=root:2);
 3.Set(current,this==root);

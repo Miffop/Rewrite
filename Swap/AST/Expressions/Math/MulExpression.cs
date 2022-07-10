@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Swap.AST.Expressions.Math
 {
-    internal class MulExpression:IOptimizableExpression
+    internal class MulExpression:IOptimizableExpression,IBinaryExpression
     {
-        IExpression AExp, BExp;
+        public IExpression AExp { get; set; }
+        public IExpression BExp { get; set; }
         public MulExpression(IExpression a,IExpression b)
         {
             this.AExp = a;
