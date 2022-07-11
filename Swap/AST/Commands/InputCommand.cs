@@ -8,8 +8,8 @@ namespace Swap.AST.Commands
 {
     internal class InputCommand:ICommand,IUnaryOperation
     {
-        public IExpression AExp { get; set; }//Address
-        public InputCommand(IExpression address,int ln)
+        public ExpressionContainer AExp { get; set; }//Address
+        public InputCommand(ExpressionContainer address,int ln)
         {
             this.AExp = address;
             this.Line = ln;
@@ -17,7 +17,7 @@ namespace Swap.AST.Commands
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
             LinkedListNode<ICommand> addr;
-            if (AExp.Eval(c).GetNode(out addr))
+            if (AExp.Expression.Eval(c).GetNode(out addr))
             {
                 addr.Value = new StoreCommand(new Values.VString(Console.ReadLine()), addr.Value.Line);
                 addr.Value.Parent = addr;

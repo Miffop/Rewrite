@@ -25,20 +25,20 @@ namespace Swap.Parser.Expressions.OperationParsers
             priority = -1;
             return false;
         }
-        public AST.IExpression Parse(string operation,AST.IExpression left,AST.IExpression right)
+        public AST.IExpression Parse(string operation,AST.ExpressionContainer left,AST.ExpressionContainer right)
         {
             switch (operation)
             {
                 case "+":
-                    return new AST.Expressions.Math.SumExpression(left, right);
+                    return new AST.Expressions.Math.SumExpression(left, right, null);
                 case "-":
-                    return new AST.Expressions.Math.DiffExpression(left, right);
+                    return new AST.Expressions.Math.DiffExpression(left, right, null);
                 case "*":
-                    return new AST.Expressions.Math.MulExpression(left, right);
+                    return new AST.Expressions.Math.MulExpression(left, right, null);
                 case "/":
-                    return new AST.Expressions.Math.DivExpression(left, right);
+                    return new AST.Expressions.Math.DivExpression(left, right, null);
                 case "%":
-                    return new AST.Expressions.Math.ModExpression(left, right);
+                    return new AST.Expressions.Math.ModExpression(left, right, null);
                 default:
                     throw new Exception($"Cannot parse operation: '{operation}'");
             }

@@ -8,18 +8,20 @@ namespace Swap.AST.Expressions.Reflection
 {
     internal class SublineExpression:IExpression,IBinaryOperation
     {
-        public IExpression AExp { get; set; }
-        public IExpression BExp { get; set; }
-        public SublineExpression(IExpression a,IExpression b)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public ExpressionContainer BExp { get; set; }
+        public SublineExpression(ExpressionContainer a, ExpressionContainer b,ExpressionContainer parent)
         {
             this.AExp = a;
             this.BExp = b;
+            this.Parent = parent;
         }
 
         public IValue Eval(Context c)
         {
-            IValue vA = AExp.Eval(c);
-            IValue vB = BExp.Eval(c);
+            IValue vA = AExp.Expression.Eval(c);
+            IValue vB = BExp.Expression.Eval(c);
             LinkedListNode<ICommand> nA;
             IExpression eA;
             int iB;
@@ -31,22 +33,22 @@ namespace Swap.AST.Expressions.Reflection
                 }
                 else if(nA.Value is IUnaryOperation && iB==0)
                 {
-                    return new Values.VExpression((nA.Value as IUnaryOperation).AExp);
+                    return new Values.VExpression((nA.Value as IUnaryOperation).AExp.Expression);
                 }
                 else if(nA.Value is IBinaryOperation && iB == 1)
                 {
-                    return new Values.VExpression((nA.Value as IBinaryOperation).BExp);
+                    return new Values.VExpression((nA.Value as IBinaryOperation).BExp.Expression);
                 }
             }
             if(vA.GetExpression(out eA) && vB.GetInteger(out iB))
             {
                 if(eA is IUnaryOperation && iB == 0)
                 {
-                    return new Values.VExpression((eA as IUnaryOperation).AExp);
+                    return new Values.VExpression((eA as IUnaryOperation).AExp.Expression);
                 }
                 else if(eA is IBinaryOperation && iB == 1)
                 {
-                    return new Values.VExpression((eA as IBinaryOperation).BExp);
+                    return new Values.VExpression((eA as IBinaryOperation).BExp.Expression);
                 }
             }
             throw new Exception($"Cannot perform: {this.Stringify()}");

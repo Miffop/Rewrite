@@ -15,13 +15,13 @@ namespace Swap.Parser.Expressions.ValueParsers
                 switch (code[index].Argument)
                 {
                     case "this":
-                        val = new AST.Expressions.ThisBlockExpression();
+                        val = new AST.Expressions.ThisBlockExpression(null);
                         return true;
                     case "current":
-                        val=new AST.Expressions.CurrentNodeExpression();
+                        val=new AST.Expressions.CurrentNodeExpression(null);
                         return true;
                     case "root":
-                        val = new AST.Expressions.RootNodeExpression();
+                        val = new AST.Expressions.RootNodeExpression(null);
                         return true;
                 }
             }

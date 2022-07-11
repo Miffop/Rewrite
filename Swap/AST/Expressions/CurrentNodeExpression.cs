@@ -8,6 +8,11 @@ namespace Swap.AST.Expressions
 {
     internal class CurrentNodeExpression:IExpression
     {
+        public ExpressionContainer Parent { get; set; }
+        public CurrentNodeExpression(ExpressionContainer parent)
+        {
+            this.Parent = parent;
+        }
         public IValue Eval(Context c)
         {
             return new Values.VNode(c.Current.Find(c.ExecutingLine));

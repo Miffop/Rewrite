@@ -30,7 +30,7 @@ namespace Swap.Parser.Commands
             if (code[index].Command != "Int") throw new Exception("expected line to be numbered");
             int Line = Int32.Parse(code[index].Argument);
             if (code[index+1].Command != ".") throw new Exception($"'.' expected line: {Line}");
-            if (code[index + 2].Command == "BraceOpen")
+            if (code[index + 2].Command == "BraceOpen" && code[index+2].Argument=="{")
             {
                 throw new NotImplementedException();
             }
@@ -46,14 +46,14 @@ namespace Swap.Parser.Commands
                         return result;
                     }
                 }
-                AST.IExpression exp = expHandler.Parse(code, index + 2, length - 3);
-                if(exp is AST.IOptimizableExpression && (exp as AST.IOptimizableExpression).IsConstant())
+                AST.ExpressionContainer exp = expHandler.Parse(code, index + 2, length - 3);
+                if(exp.Expression is AST.IOptimizableExpression && (exp.Expression as AST.IOptimizableExpression).IsConstant())
                 {
-                    return new AST.Commands.StoreCommand(exp.Eval(null), Line);
+                    return new AST.Commands.StoreCommand(exp.Expression.Eval(null), Line);
                 }
                 else
                 {
-                    return new AST.Commands.StoreCommand(new AST.Values.VExpression(exp), Line);
+                    return new AST.Commands.StoreCommand(new AST.Values.VExpression(exp.Expression), Line);
                 }
             }
         }

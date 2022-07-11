@@ -39,8 +39,8 @@ namespace Swap.Parser.Commands.CommandParsers
                         }
                         len1++;
                     }
-                    AST.IExpression A = ep.Parse(code, index + 2, len1 - 2);
-                    AST.IExpression B = ep.Parse(code, index + len1 + 1, length - len1 - 2);
+                    AST.ExpressionContainer A = ep.Parse(code, index + 2, len1 - 2);
+                    AST.ExpressionContainer B = ep.Parse(code, index + len1 + 1, length - len1 - 2);
                     switch (code[index].Argument)
                     {
                         case "Swap":

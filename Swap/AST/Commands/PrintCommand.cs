@@ -8,15 +8,15 @@ namespace Swap.AST.Commands
 {
     internal class PrintCommand:ICommand,IUnaryOperation
     {
-        public IExpression AExp { get; set; }
-        public PrintCommand(IExpression address,int ln)
+        public ExpressionContainer AExp { get; set; }
+        public PrintCommand(ExpressionContainer address,int ln)
         {
             this.AExp = address;
             this.Line = ln;
         }
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
-            IValue vA = AExp.Eval(c);
+            IValue vA = AExp.Expression.Eval(c);
             int i;
             string s;
             IExpression e;

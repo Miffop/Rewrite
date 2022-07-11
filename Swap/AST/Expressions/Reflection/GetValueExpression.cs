@@ -8,14 +8,16 @@ namespace Swap.AST.Expressions.Reflection
 {
     internal class GetValueExpression:IExpression,IUnaryOperation
     {
-        public IExpression AExp { get; set; }
-        public GetValueExpression(IExpression addr)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public GetValueExpression(ExpressionContainer addr, ExpressionContainer parent)
         {
             this.AExp = addr;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {
-            IValue vA = AExp.Eval(c);
+            IValue vA = AExp.Expression.Eval(c);
             IExpression exp;
             LinkedListNode<ICommand> node;
             if(vA.GetNode(out node))

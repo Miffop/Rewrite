@@ -8,6 +8,6 @@ namespace Swap.AST
 {
     internal interface IUnaryOperation
     {
-        IExpression AExp { get; set; }
+        ExpressionContainer AExp { get; set; }
     }
 }

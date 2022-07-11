@@ -53,6 +53,7 @@
     <Compile Include="AST\Commands\StoreCommand.cs" />
     <Compile Include="AST\Commands\SwapCommand.cs" />
     <Compile Include="AST\Context.cs" />
+    <Compile Include="AST\ExpressionContainer.cs" />
     <Compile Include="AST\Expressions\Comparison\GreaterEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\LessEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\LessExpression.cs" />

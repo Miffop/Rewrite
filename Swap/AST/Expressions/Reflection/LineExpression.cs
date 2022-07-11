@@ -8,15 +8,17 @@ namespace Swap.AST.Expressions.Reflection
 {
     internal class LineExpression:IExpression,IUnaryOperation
     {
-        public IExpression AExp { get; set; }
-        public LineExpression(IExpression node)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public LineExpression(ExpressionContainer node,ExpressionContainer parent)
         {
             this.AExp = node;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {
             LinkedListNode<ICommand> n;
-            if(AExp.Eval(c).GetNode(out n))
+            if(AExp.Expression.Eval(c).GetNode(out n))
             {
                 return new Values.VInteger(n.Value.Line);
             }

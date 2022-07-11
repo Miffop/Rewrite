@@ -19,7 +19,7 @@ namespace Swap.Parser.Expressions
             this.Values = values;
             this.Optimization = optimization;
         }
-        public IExpression Parse(List<Syntax.Token> code, int index, int length)
+        public ExpressionContainer Parse(List<Syntax.Token> code, int index, int length)
         {
             int priority = -1;
             int operationIndex = -1;
@@ -61,7 +61,7 @@ namespace Swap.Parser.Expressions
                 }
                 else if (length == 0)
                 {
-                    return new AST.Expressions.ValueExpression(new AST.Values.VNull());
+                    return new ExpressionContainer(new AST.Expressions.ValueExpression(new AST.Values.VNull(), null));
                 }
                 else
                 {
@@ -74,7 +74,7 @@ namespace Swap.Parser.Expressions
                             {
                                 result = (result as IOptimizableExpression).Optimise();
                             }
-                            return result;
+                            return new ExpressionContainer(result);
                         }
                     }
                     throw new Exception("Unknown syntax");
@@ -87,7 +87,7 @@ namespace Swap.Parser.Expressions
                 {
                     res = (res as IOptimizableExpression).Optimise();
                 }
-                return res;
+                return new ExpressionContainer(res);
             }
         }
     }

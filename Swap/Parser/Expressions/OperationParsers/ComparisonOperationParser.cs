@@ -27,22 +27,22 @@ namespace Swap.Parser.Expressions.OperationParsers
                     return false;
             }
         }
-        public AST.IExpression Parse(string operation,AST.IExpression A, AST.IExpression B)
+        public AST.IExpression Parse(string operation,AST.ExpressionContainer A, AST.ExpressionContainer B)
         {
             switch (operation)
             {
                 case "==":
-                    return new AST.Expressions.Comparison.EqualExpression(A, B);
+                    return new AST.Expressions.Comparison.EqualExpression(A, B, null);
                 case "!=":
-                    return new AST.Expressions.Comparison.NotEqualExpression(A, B);
+                    return new AST.Expressions.Comparison.NotEqualExpression(A, B, null);
                 case ">":
-                    return new AST.Expressions.Comparison.GreaterExpression(A, B);
+                    return new AST.Expressions.Comparison.GreaterExpression(A, B, null);
                 case ">=":
-                    return new AST.Expressions.Comparison.GreaterEqualExpression(A, B);
+                    return new AST.Expressions.Comparison.GreaterEqualExpression(A, B, null);
                 case "<":
-                    return new AST.Expressions.Comparison.LessExpression(A, B);
+                    return new AST.Expressions.Comparison.LessExpression(A, B, null);
                 case "<=":
-                    return new AST.Expressions.Comparison.LessEqualExpression(A, B);
+                    return new AST.Expressions.Comparison.LessEqualExpression(A, B, null);
                 default:
                     throw new NotImplementedException();
             }

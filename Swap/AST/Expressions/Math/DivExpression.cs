@@ -8,17 +8,19 @@ namespace Swap.AST.Expressions.Math
 {
     internal class DivExpression:IOptimizableExpression,IBinaryOperation
     {
-        public IExpression AExp { get; set; }
-        public IExpression BExp { get; set; }
-        public DivExpression(IExpression a,IExpression b)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public ExpressionContainer BExp { get; set; }
+        public DivExpression(ExpressionContainer a, ExpressionContainer b, ExpressionContainer parent)
         {
             this.AExp = a;
             this.BExp = b;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {
-            IValue A = AExp.Eval(c);
-            IValue B = BExp.Eval(c);
+            IValue A = AExp.Expression.Eval(c);
+            IValue B = BExp.Expression.Eval(c);
 
             int iA, iB;
             if(A.GetInteger(out iA) && B.GetInteger(out iB))
@@ -37,25 +39,19 @@ namespace Swap.AST.Expressions.Math
         public bool IsConstant()
         {
             return
-                AExp is IOptimizableExpression &&
-                BExp is IOptimizableExpression &&
-                (AExp as IOptimizableExpression).IsConstant() &&
-                (BExp as IOptimizableExpression).IsConstant();
+                AExp.Expression is IOptimizableExpression &&
+                BExp.Expression is IOptimizableExpression &&
+                (AExp.Expression as IOptimizableExpression).IsConstant() &&
+                (BExp.Expression as IOptimizableExpression).IsConstant();
 
         }
         public IExpression Optimise()
         {
-            if (AExp is IOptimizableExpression)
-            {
-                AExp = (AExp as IOptimizableExpression).Optimise();
-            }
-            if (BExp is IOptimizableExpression)
-            {
-                BExp = (BExp as IOptimizableExpression).Optimise();
-            }
+            AExp.TryOptimise();
+            BExp.TryOptimise();
             if (IsConstant())
             {
-                return new ValueExpression(Eval(null));
+                return new ValueExpression(Eval(null), this.Parent);
             }
             else
             {

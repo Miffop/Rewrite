@@ -58,7 +58,7 @@ namespace Swap
                 });
                 var com = cp.Parse(tokens, 0, tokens.Count, 1, ep);
                 
-                Console.WriteLine(com.Stringify());
+                //Console.WriteLine(com.Stringify());
                 
                 LinkedListNode<ICommand> rootNode = new LinkedListNode<ICommand>(com);
                 com.Parent = rootNode;

@@ -10,6 +10,6 @@ namespace Swap.Parser.Expressions
     {
 
         bool GetPriority(string operation,out int priority);
-        AST.IExpression Parse(string operation, AST.IExpression left, AST.IExpression right);
+        AST.IExpression Parse(string operation, AST.ExpressionContainer left, AST.ExpressionContainer right);
     }
 }

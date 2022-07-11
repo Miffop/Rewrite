@@ -8,9 +8,9 @@ namespace Swap.AST.Commands
 {
     internal class SetCommand:ICommand,IBinaryOperation
     {
-        public IExpression AExp { get; set; }//Address
-        public IExpression BExp { get; set; }//Value
-        public SetCommand(IExpression addr,IExpression val,int ln)
+        public ExpressionContainer AExp { get; set; }//Address
+        public ExpressionContainer BExp { get; set; }//Value
+        public SetCommand(ExpressionContainer addr, ExpressionContainer val,int ln)
         {
             this.AExp = addr;
             this.BExp = val;
@@ -18,18 +18,18 @@ namespace Swap.AST.Commands
         }
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
-            IValue vA = AExp.Eval(c);
+            IValue vA = AExp.Expression.Eval(c);
             IExpression exp;
             LinkedListNode<ICommand> node;
             if(vA.GetNode(out node))
             {
                 if(node.Value is StoreCommand)
                 {
-                    (node.Value as StoreCommand).Data = BExp.Eval(c);
+                    (node.Value as StoreCommand).Data = BExp.Expression.Eval(c);
                 }
                 else
                 {
-                    node.Value = new StoreCommand(BExp.Eval(c), node.Value.Line);
+                    node.Value = new StoreCommand(BExp.Expression.Eval(c), node.Value.Line);
                     node.Value.Parent = node;
                 }
                 return Parent.Next;
@@ -38,11 +38,22 @@ namespace Swap.AST.Commands
             {
                 if(exp is Expressions.ValueExpression)
                 {
-                    (exp as Expressions.ValueExpression).Value=BExp.Eval(c);
+                    (exp as Expressions.ValueExpression).Value=BExp.Expression.Eval(c);
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    IValue vB = BExp.Expression.Eval(c);
+                    IExpression eB;
+                    if(!vB.GetExpression(out eB))
+                    {
+                        eB = new Expressions.ValueExpression(vB, exp.Parent);
+                    }
+                    else
+                    {
+                        eB.Parent = exp.Parent;
+                    }
+                    exp.Parent.Expression = eB;
+                    
                 }
                 return Parent.Next;
             }

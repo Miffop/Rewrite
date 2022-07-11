@@ -26,17 +26,17 @@ namespace Swap.Parser.Expressions.ValueParsers
                     {
                         throw new Exception("')' expected");
                     }
-                    AST.IExpression Base = ep.Parse(code, index + 2, length - 3);
+                    AST.ExpressionContainer Base = ep.Parse(code, index + 2, length - 3);
                     switch (code[index].Argument)
                     {
                         case "Line":
-                            exp = new AST.Expressions.Reflection.LineExpression(Base);
+                            exp = new AST.Expressions.Reflection.LineExpression(Base, null);
                             break;
                         case "Value":
-                            exp = new AST.Expressions.Reflection.GetValueExpression(Base);
+                            exp = new AST.Expressions.Reflection.GetValueExpression(Base, null);
                             break;
                         case "Int":
-                            exp = new AST.Expressions.Conversion.ToIntExpression(Base);
+                            exp = new AST.Expressions.Conversion.ToIntExpression(Base, null);
                             break;
                         default:
                             throw new Exception("This must be a bug");

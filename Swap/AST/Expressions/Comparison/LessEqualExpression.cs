@@ -8,17 +8,19 @@ namespace Swap.AST.Expressions.Comparison
 {
     internal class LessEqualExpression:IOptimizableExpression,IBinaryOperation
     {
-        public IExpression AExp { get; set; }
-        public IExpression BExp { get; set; }
-        public LessEqualExpression(IExpression a,IExpression b)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public ExpressionContainer BExp { get; set; }
+        public LessEqualExpression(ExpressionContainer a, ExpressionContainer b,ExpressionContainer parent)
         {
             this.AExp = a;
             this.BExp = b;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {
-            IValue vA = AExp.Eval(c);
-            IValue vB = BExp.Eval(c);
+            IValue vA = AExp.Expression.Eval(c);
+            IValue vB = BExp.Expression.Eval(c);
             int iA, iB;
             string sA, sB;
             LinkedListNode<ICommand> nA, nB;
@@ -43,23 +45,17 @@ namespace Swap.AST.Expressions.Comparison
         public bool IsConstant()
         {
             return
-                (AExp is IOptimizableExpression) && (AExp as IOptimizableExpression).IsConstant() &&
-                (BExp is IOptimizableExpression) && (BExp as IOptimizableExpression).IsConstant();
+                (AExp.Expression is IOptimizableExpression) && (AExp.Expression as IOptimizableExpression).IsConstant() &&
+                (BExp.Expression is IOptimizableExpression) && (BExp.Expression as IOptimizableExpression).IsConstant();
 
         }
         public IExpression Optimise()
         {
-            if (AExp is IOptimizableExpression)
-            {
-                AExp = (AExp as IOptimizableExpression).Optimise();
-            }
-            if (BExp is IOptimizableExpression)
-            {
-                BExp = (BExp as IOptimizableExpression).Optimise();
-            }
+            AExp.TryOptimise();
+            BExp.TryOptimise();
             if (IsConstant())
             {
-                return new ValueExpression(this.Eval(null));
+                return new ValueExpression(this.Eval(null), this.Parent);
             }
             return this;
         }

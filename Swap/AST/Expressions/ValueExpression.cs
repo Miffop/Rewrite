@@ -8,10 +8,12 @@ namespace Swap.AST.Expressions
 {
     internal class ValueExpression:IOptimizableExpression
     {
+        public ExpressionContainer Parent { get; set; }
         public IValue Value { get; set; }
-        public ValueExpression(IValue v)
+        public ValueExpression(IValue v,ExpressionContainer parent)
         {
             this.Value = v;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {

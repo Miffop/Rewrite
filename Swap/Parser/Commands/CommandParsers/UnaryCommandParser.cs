@@ -27,7 +27,7 @@ namespace Swap.Parser.Commands.CommandParsers
                     {
                         throw new Exception("')' expected");
                     }
-                    AST.IExpression lineExp = expHandler.Parse(code, index + 2, length - 3);
+                    AST.ExpressionContainer lineExp = expHandler.Parse(code, index + 2, length - 3);
                     switch (code[index].Argument)
                     {
                         case "Print":

@@ -15,10 +15,10 @@ namespace Swap.Parser.Expressions.ValueParsers
                 switch (code[index].Command)
                 {
                     case "Int":
-                        val = new AST.Expressions.ValueExpression(new AST.Values.VInteger(Int32.Parse(code[index].Argument)));
+                        val = new AST.Expressions.ValueExpression(new AST.Values.VInteger(Int32.Parse(code[index].Argument)),null);
                         return true;
                     case "String":
-                        val = new AST.Expressions.ValueExpression(new AST.Values.VString(code[index].Argument));
+                        val = new AST.Expressions.ValueExpression(new AST.Values.VString(code[index].Argument),null);
                         return true;
                 }
             }

@@ -8,17 +8,19 @@ namespace Swap.AST.Expressions.Math
 {
     internal class MulExpression:IOptimizableExpression,IBinaryOperation
     {
-        public IExpression AExp { get; set; }
-        public IExpression BExp { get; set; }
-        public MulExpression(IExpression a,IExpression b)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public ExpressionContainer BExp { get; set; }
+        public MulExpression(ExpressionContainer a, ExpressionContainer b,ExpressionContainer parent)
         {
             this.AExp = a;
             this.BExp = b;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {
-            IValue A = AExp.Eval(c);
-            IValue B = BExp.Eval(c);
+            IValue A = AExp.Expression.Eval(c);
+            IValue B = BExp.Expression.Eval(c);
 
             int iA, iB;
             string sA,sB;
@@ -66,41 +68,37 @@ namespace Swap.AST.Expressions.Math
         public bool IsConstant()
         {
             return
-                AExp is IOptimizableExpression &&
-                BExp is IOptimizableExpression &&
-                (AExp as IOptimizableExpression).IsConstant() &&
-                (BExp as IOptimizableExpression).IsConstant();
+                AExp.Expression is IOptimizableExpression &&
+                BExp.Expression is IOptimizableExpression &&
+                (AExp.Expression as IOptimizableExpression).IsConstant() &&
+                (BExp.Expression as IOptimizableExpression).IsConstant();
 
         }
         public IExpression Optimise()
         {
-            if (AExp is IOptimizableExpression)
-            {
-                AExp = (AExp as IOptimizableExpression).Optimise();
-            }
-            if (BExp is IOptimizableExpression)
-            {
-                BExp = (BExp as IOptimizableExpression).Optimise();
-            }
+            AExp.TryOptimise();
+            BExp.TryOptimise();
             if (IsConstant())
             {
-                return new ValueExpression(Eval(null));
+                return new ValueExpression(Eval(null), this.Parent);
             }
-            else if(AExp is MulExpression && (BExp is IOptimizableExpression) && (BExp as IOptimizableExpression).IsConstant())
+            else if(AExp.Expression is MulExpression && (BExp.Expression is IOptimizableExpression) && (BExp.Expression as IOptimizableExpression).IsConstant())
             {
-                MulExpression AMul = (AExp as MulExpression);
-                if((AMul.BExp is IOptimizableExpression) && (AMul.BExp as IOptimizableExpression).IsConstant())
+                MulExpression AMul = (AExp.Expression as MulExpression);
+                if((AMul.BExp.Expression is IOptimizableExpression) && (AMul.BExp.Expression as IOptimizableExpression).IsConstant())
                 {
-                    AMul.BExp = new MulExpression(AMul.BExp, this.BExp).Optimise();
+                    AMul.BExp.Expression = new MulExpression(AMul.BExp, this.BExp,AMul.BExp).Optimise();
+                    AMul.Parent = this.Parent;
                     return AMul;
                 }
             }
-            else if (BExp is MulExpression && (AExp is IOptimizableExpression) && (AExp as IOptimizableExpression).IsConstant())
+            else if (BExp.Expression is MulExpression && (AExp.Expression is IOptimizableExpression) && (AExp.Expression as IOptimizableExpression).IsConstant())
             {
-                MulExpression BMul = (BExp as MulExpression);
-                if ((BMul.AExp is IOptimizableExpression) && (BMul.AExp as IOptimizableExpression).IsConstant())
+                MulExpression BMul = (BExp.Expression as MulExpression);
+                if ((BMul.AExp.Expression is IOptimizableExpression) && (BMul.AExp.Expression as IOptimizableExpression).IsConstant())
                 {
-                    BMul.AExp = new MulExpression(BMul.AExp, this.AExp).Optimise();
+                    BMul.AExp.Expression = new MulExpression(BMul.AExp, this.AExp,BMul.AExp).Optimise();
+                    BMul.Parent = this.Parent;
                     return BMul;
                 }
             }

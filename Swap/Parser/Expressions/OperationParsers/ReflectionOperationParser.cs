@@ -19,12 +19,12 @@ namespace Swap.Parser.Expressions.OperationParsers
             i = -1;
             return false;
         }
-        public AST.IExpression Parse(string operation,AST.IExpression A,AST.IExpression B)
+        public AST.IExpression Parse(string operation,AST.ExpressionContainer A,AST.ExpressionContainer B)
         {
             switch (operation)
             {
                 case ":":
-                    return new AST.Expressions.Reflection.SublineExpression(A, B);
+                    return new AST.Expressions.Reflection.SublineExpression(A, B, null);
                 default:
                     throw new NotImplementedException();
             }

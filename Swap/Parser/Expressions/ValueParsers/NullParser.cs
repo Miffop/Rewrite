@@ -12,7 +12,7 @@ namespace Swap.Parser.Expressions.ValueParsers
         {
             if(length==1 && code[index].Command=="Word" && code[index].Argument == "null")
             {
-                val = new AST.Expressions.ValueExpression(new AST.Values.VNull());
+                val = new AST.Expressions.ValueExpression(new AST.Values.VNull(), null);
                 return true;
             }
             val = null;

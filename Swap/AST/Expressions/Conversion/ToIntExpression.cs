@@ -8,15 +8,17 @@ namespace Swap.AST.Expressions.Conversion
 {
     internal class ToIntExpression:IOptimizableExpression,IUnaryOperation
     {
-        public IExpression AExp { get; set; }
-        public ToIntExpression(IExpression exp)
+        public ExpressionContainer Parent { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public ToIntExpression(ExpressionContainer exp,ExpressionContainer parent)
         {
             this.AExp = exp;
+            this.Parent = parent;
         }
         public IValue Eval(Context c)
         {
             int result;
-            IValue val = AExp.Eval(c);
+            IValue val = AExp.Expression.Eval(c);
             if(val.GetInteger(out result))
             {
                 return new Values.VInteger(result);
@@ -37,17 +39,14 @@ namespace Swap.AST.Expressions.Conversion
         }
         public bool IsConstant()
         {
-            return (AExp is IOptimizableExpression) && (AExp as IOptimizableExpression).IsConstant();
+            return (AExp.Expression is IOptimizableExpression) && (AExp.Expression as IOptimizableExpression).IsConstant();
         }
         public IExpression Optimise()
         {
-            if(AExp is IOptimizableExpression)
-            {
-                AExp = (AExp as IOptimizableExpression).Optimise();
-            }
+            AExp.TryOptimise();
             if(IsConstant())
             {
-                return new ValueExpression(this.Eval(null));
+                return new ValueExpression(this.Eval(null), this.Parent);
             }
             return this;
         }

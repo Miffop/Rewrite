@@ -8,8 +8,8 @@ namespace Swap.AST.Commands
 {
     internal class GoToCommand:ICommand,IUnaryOperation
     {
-        public IExpression AExp { get; set; }//Address
-        public GoToCommand(IExpression to,int ln)
+        public ExpressionContainer AExp { get; set; }//Address
+        public GoToCommand(ExpressionContainer to,int ln)
         {
             this.AExp = to;
             this.Line = ln;
@@ -17,7 +17,7 @@ namespace Swap.AST.Commands
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
             LinkedListNode<ICommand> To;
-            if (AExp.Eval(c).GetNode(out To))
+            if (AExp.Expression.Eval(c).GetNode(out To))
             {
                 return To;
             }

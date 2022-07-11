@@ -8,49 +8,64 @@ namespace Swap.AST.Commands
 {
     internal class SwapCommand:ICommand,IBinaryOperation
     {
-        public IExpression AExp { get; set; }
-        public IExpression BExp { get; set; }
+        public ExpressionContainer AExp { get; set; }
+        public ExpressionContainer BExp { get; set; }
 
-        public SwapCommand(IExpression A,IExpression B,int ln)
+        public SwapCommand(ExpressionContainer A, ExpressionContainer B,int ln)
         {
             this.AExp = A;
-            this.AExp = B;
+            this.BExp = B;
             this.Line = ln;
         }
 
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
-            IValue lineA = AExp.Eval(c);
-            IValue lineB = AExp.Eval(c);
+            IValue lineA = AExp.Expression.Eval(c);
+            IValue lineB = BExp.Expression.Eval(c);
             
-            LinkedListNode<ICommand> A, B;
-            
-            if(lineA.GetNode(out A) && lineB.GetNode(out B))
+            LinkedListNode<ICommand> nA, nB;
+            IExpression eA, eB;
+            if(lineA.GetNode(out nA) && lineB.GetNode(out nB))
             {
                 {
-                    ICommand I = A.Value;
-                    A.Value = B.Value;
-                    B.Value = I;
+                    ICommand I = nA.Value;
+                    nA.Value = nB.Value;
+                    nB.Value = I;
                 }
                 {
-                    int i = A.Value.Line;
-                    A.Value.Line = B.Value.Line;
-                    B.Value.Line = i;
+                    int i = nA.Value.Line;
+                    nA.Value.Line = nB.Value.Line;
+                    nB.Value.Line = i;
                 }
                 {
-                    A.Value.Parent = B;
-                    B.Value.Parent = A;
+                    nA.Value.Parent = nB;
+                    nB.Value.Parent = nA;
+                }
+                return Parent.Next;
+            }
+            else if(lineA.GetExpression(out eA) && lineB.GetExpression(out eB))
+            {
+                ExpressionContainer ecA = eA.Parent;
+                ExpressionContainer ecB = eB.Parent;
+                {
+                    IExpression I = ecA.Expression;
+                    ecA.Expression = ecB.Expression;
+                    ecB.Expression = I;
+                }
+                {
+                    eA.Parent = ecB;
+                    eB.Parent = ecA;
                 }
                 return Parent.Next;
             }
             else
             {
-                throw new Exception("Address Expected");
+                throw new Exception($"Cannot perform: {this.Stringify()}");
             }
         }
         public override string Stringify()
         {
-            return $"Swap({this.AExp.Stringify()},{this.AExp.Stringify()});";
+            return $"Swap({this.AExp.Stringify()},{this.BExp.Stringify()});";
         }
     }
 

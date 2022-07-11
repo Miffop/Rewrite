@@ -8,8 +8,8 @@ namespace Swap.AST.Commands
 {
     internal class DeleteCommand:ICommand,IUnaryOperation
     {
-        public IExpression AExp { get; set; }//Address
-        public DeleteCommand(IExpression addr,int ln)
+        public ExpressionContainer AExp { get; set; }//Address
+        public DeleteCommand(ExpressionContainer addr,int ln)
         {
             this.AExp = addr;
             this.Line = ln;
@@ -17,7 +17,7 @@ namespace Swap.AST.Commands
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
             LinkedListNode<ICommand> com;
-            if(AExp.Eval(c).GetNode(out com))
+            if(AExp.Expression.Eval(c).GetNode(out com))
             {
                 /*
                 com.Value = new NoCommand(com.Value.Line);
