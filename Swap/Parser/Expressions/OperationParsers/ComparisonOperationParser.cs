@@ -14,13 +14,13 @@ namespace Swap.Parser.Expressions.OperationParsers
             {
                 case "!=":
                 case "==":
-                    i = 4;
+                    i = 3;
                     return true;
                 case ">":
                 case "<":
                 case ">=":
                 case "<=":
-                    i = 5;
+                    i = 4;
                     return true;
                 default:
                     i = -1;

@@ -1,2 +1,1 @@
-﻿1.Print(root:2);
-2."Hello, World!\n";
+﻿1.Print("Hello, World!\n");

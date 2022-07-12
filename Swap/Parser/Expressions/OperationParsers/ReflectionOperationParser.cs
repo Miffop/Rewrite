@@ -13,7 +13,7 @@ namespace Swap.Parser.Expressions.OperationParsers
             switch (operation)
             {
                 case ":":
-                    i = 3;
+                    i = 5;
                     return true;
             }
             i = -1;

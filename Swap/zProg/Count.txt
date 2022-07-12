@@ -1,8 +1,7 @@
-﻿5."\n";
-10.1;
-20.Delete(root:100-Value(root:10));
-30.Print(root:10);
-35.Print(root:5);
-40.Set(root:10,Value(root:10)+1);
-
-50.GoTo(root:20);
+﻿10.Print(1);
+11.Print("\n");
+20.Set(root:10:0,Value(root:10:0)+1);
+30.GoTo(
+	root:
+		(Value(root:10:0)>15)*31
+);

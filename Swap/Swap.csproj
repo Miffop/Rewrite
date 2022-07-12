@@ -120,6 +120,7 @@
   <ItemGroup>
     <Content Include="Test.txt" />
     <Content Include="zProg\cat.txt" />
+    <Content Include="zProg\fizz-buzz.txt" />
     <Content Include="zProg\Test.txt" />
     <Content Include="zProg\hello-world.txt" />
     <Content Include="zProg\Count.txt" />

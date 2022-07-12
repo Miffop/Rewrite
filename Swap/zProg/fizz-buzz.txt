@@ -1,0 +1,19 @@
+﻿1.GoTo(root:8);
+2.Print("fizz");
+3.GoTo(root:9);
+4.Print("buzz");
+5.GoTo(root:9);
+6.Print("fizzbuzz");
+7.GoTo(root:9);
+8.Print(1);
+9.Set(root:8:0,Value(root:8:0)+1);
+10.Print("\n");
+11.GoTo(root:
+	(Value(root:8:0) >  30)*13+
+	(Value(root:8:0) <= 30)*12
+);
+12.GoTo(root:
+	(Value(root:8:0) % 3==0)*2+
+	(Value(root:8:0) % 5==0)*4
+);
+13.Halt();
