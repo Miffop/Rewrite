@@ -1,7 +1,7 @@
-﻿10.Print(1);
-11.Print("\n");
-20.Set(root:10:0,Value(root:10:0)+1);
-30.GoTo(
-	root:
-		(Value(root:10:0)>15)*31
-);
+﻿1.Set(current,Int(input));
+2.While(Value(root:2:1::0)<=Value(root:1))
+{
+	1.Print(1);
+	2.Print("\n");
+	3.Set(this:1::0,Value(this:1::0)+1);
+}

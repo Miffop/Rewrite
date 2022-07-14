@@ -31,14 +31,6 @@ namespace Swap.AST.Expressions.Reflection
                 {
                     return new Values.VNode((nA.Value as ProgramList).Find(iB));
                 }
-                else if(nA.Value is IUnaryOperation && iB==0)
-                {
-                    return new Values.VExpression((nA.Value as IUnaryOperation).AExp.Expression);
-                }
-                else if(nA.Value is IBinaryOperation && iB == 1)
-                {
-                    return new Values.VExpression((nA.Value as IBinaryOperation).BExp.Expression);
-                }
             }
             if(vA.GetExpression(out eA) && vB.GetInteger(out iB))
             {

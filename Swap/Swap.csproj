@@ -51,7 +51,9 @@
     <Compile Include="AST\Commands\PrintCommand.cs" />
     <Compile Include="AST\Commands\SetCommand.cs" />
     <Compile Include="AST\Commands\StoreCommand.cs" />
+    <Compile Include="AST\Commands\Structures\IFCommand.cs" />
     <Compile Include="AST\Commands\SwapCommand.cs" />
+    <Compile Include="AST\Commands\Structures\WhileCommand.cs" />
     <Compile Include="AST\Context.cs" />
     <Compile Include="AST\ExpressionContainer.cs" />
     <Compile Include="AST\Expressions\Comparison\GreaterEqualExpression.cs" />
@@ -62,6 +64,8 @@
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\NotEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\EqualExpression.cs" />
+    <Compile Include="AST\Expressions\InputExpression.cs" />
+    <Compile Include="AST\Expressions\Reflection\SubExpExpression.cs" />
     <Compile Include="AST\IBinaryOperation.cs" />
     <Compile Include="AST\IUnaryOperation.cs" />
     <Compile Include="AST\Expressions\Math\ModExpression.cs" />
@@ -91,12 +95,15 @@
     <Compile Include="Parser\Commands\CommandParsers\UnaryCommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\ReflectionCommandParser.cs" />
     <Compile Include="Parser\Commands\ICommandParser.cs" />
+    <Compile Include="Parser\Commands\IStructureParser.cs" />
+    <Compile Include="Parser\Commands\StructureParsers\WhileAndIfStructParser.cs" />
     <Compile Include="Parser\Expressions\ExpressionParser.cs" />
     <Compile Include="Parser\Expressions\IValueParser.cs" />
     <Compile Include="Parser\Expressions\IOperationParser.cs" />
     <Compile Include="Parser\Expressions\OperationParsers\ComparisonOperationParser.cs" />
     <Compile Include="Parser\Expressions\OperationParsers\MathOperationParser.cs" />
     <Compile Include="Parser\Expressions\OperationParsers\ReflectionOperationParser.cs" />
+    <Compile Include="Parser\Expressions\ValueParsers\InputExpressionParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\UnaryFunctionParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\IntAndStringParser.cs" />
     <Compile Include="Parser\Expressions\ValueParsers\NodeNamesParser.cs" />
@@ -123,7 +130,7 @@
     <Content Include="zProg\fizz-buzz.txt" />
     <Content Include="zProg\Test.txt" />
     <Content Include="zProg\hello-world.txt" />
-    <Content Include="zProg\Count.txt" />
+    <Content Include="zProg\count.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,11 @@ namespace Swap.Parser.Syntax.TokenParsers
     {
         public bool GetLength(string code,int index,out int length)
         {
+            if (code[index] == ':' && code[index + 1] == ':')
+            {
+                length = 2;
+                return true;
+            }
             length = 1;
             return 
                 code[index] == ';' ||
@@ -28,6 +33,10 @@ namespace Swap.Parser.Syntax.TokenParsers
                 case ',':
                     return new Token(",", "");
                 case ':':
+                    if (code[index + 1] == ':')
+                    {
+                        return new Token("Oper", "::");
+                    }
                     return new Token("Oper", ":");
                 default:
                     throw new Exception();

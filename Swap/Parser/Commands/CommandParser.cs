@@ -8,14 +8,16 @@ namespace Swap.Parser.Commands
 {
     internal class CommandParser
     {
-        List<ICommandParser> Parser;
-        public CommandParser(List<ICommandParser> parsers)
+        List<ICommandParser> ComParser;
+        List<IStructureParser> StructParser;
+
+        public CommandParser(List<ICommandParser> parsers,List<IStructureParser> structs)
         {
-            this.Parser= parsers;
+            this.ComParser= parsers;
+            this.StructParser = structs;
         }
-        public AST.ProgramList Parse(List<Syntax.Token> code,int index,int length,int Line, Expressions.ExpressionParser expHandler)
+        public AST.ProgramList Parse(List<Syntax.Token> code,int index,int length, Expressions.ExpressionParser expHandler,AST.ProgramList list)
         {
-            AST.ProgramList list = new AST.ProgramList(Line);
             while (length != 0)
             {
                 int lineLength;
@@ -30,15 +32,23 @@ namespace Swap.Parser.Commands
             if (code[index].Command != "Int") throw new Exception("expected line to be numbered");
             int Line = Int32.Parse(code[index].Argument);
             if (code[index+1].Command != ".") throw new Exception($"'.' expected line: {Line}");
-            if (code[index + 2].Command == "BraceOpen" && code[index+2].Argument=="{")
+            
+            //Struct parser
             {
-                throw new NotImplementedException();
+                foreach(IStructureParser sp in StructParser)
+                {
+                    if (sp.Parse(code, index+2, out length,Line, this, expHandler, out AST.ICommand result))
+                    {
+                        length+=2;
+                        return result;
+                    }
+                }
             }
-            else
+            //Command parser
             {
                 length = 0;
                 while (code[index + length++].Command != ";") ;
-                foreach(ICommandParser p in Parser)
+                foreach(ICommandParser p in ComParser)
                 {
                     AST.ICommand result;
                     if (p.Parse(code,expHandler, index + 2, length - 3, Line, out result))

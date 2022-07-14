@@ -10,7 +10,7 @@ namespace Swap.AST
     {
 
         
-        LinkedList<ICommand> list;
+        protected LinkedList<ICommand> list;
 
         public ProgramList(int ln)
         {

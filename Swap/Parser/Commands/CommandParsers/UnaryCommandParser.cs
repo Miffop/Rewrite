@@ -35,7 +35,7 @@ namespace Swap.Parser.Commands.CommandParsers
                             break;
                         case "Input":
                             com = new AST.Commands.InputCommand(lineExp, line);
-                            break;
+                            throw new Exception("Depricated");
                         case "GoTo":
                             com = new AST.Commands.GoToCommand(lineExp, line);
                             break;

@@ -13,6 +13,8 @@ namespace Swap.Parser.Expressions.OperationParsers
             switch (operation)
             {
                 case ":":
+                case "::":
+                    i = 5;
                     i = 5;
                     return true;
             }
@@ -25,6 +27,8 @@ namespace Swap.Parser.Expressions.OperationParsers
             {
                 case ":":
                     return new AST.Expressions.Reflection.SublineExpression(A, B, null);
+                case "::":
+                    return new AST.Expressions.Reflection.SubExpExpression(A, B, null);
                 default:
                     throw new NotImplementedException();
             }

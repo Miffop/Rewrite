@@ -45,25 +45,32 @@ namespace Swap
                         new Parser.Expressions.ValueParsers.NodeNamesParser(),
                         new Parser.Expressions.ValueParsers.NullParser(),
                         new Parser.Expressions.ValueParsers.UnaryFunctionParser(),
+                        new Parser.Expressions.ValueParsers.InputExpressionParser(),
                     },
                     true
                 );
             }
             {
-                var cp = new Parser.Commands.CommandParser(new List<Parser.Commands.ICommandParser>()
-                {
-                    new Parser.Commands.CommandParsers.UnaryCommandParser(),
-                    new Parser.Commands.CommandParsers.ReflectionCommandParser(),
-                    new Parser.Commands.CommandParsers.EmptyCommandParser(),
-                });
-                var com = cp.Parse(tokens, 0, tokens.Count, 1, ep);
-                
-                //Console.WriteLine(com.Stringify());
-                
+                var cp = new Parser.Commands.CommandParser(
+                    new List<Parser.Commands.ICommandParser>()
+                    {
+                        new Parser.Commands.CommandParsers.UnaryCommandParser(),
+                        new Parser.Commands.CommandParsers.ReflectionCommandParser(),
+                        new Parser.Commands.CommandParsers.EmptyCommandParser(),
+                    },
+                    new List<Parser.Commands.IStructureParser>()
+                    {
+                        new Parser.Commands.StructureParsers.WhileAndIfStructParser(),
+                    }
+                );
+                var com = new ProgramList(1);
+                cp.Parse(tokens, 0, tokens.Count, ep, com);
+
+
                 LinkedListNode<ICommand> rootNode = new LinkedListNode<ICommand>(com);
                 com.Parent = rootNode;
                 com.Execute(new Context(com, com));
-                
+
 
             }
             //Console.WriteLine(result.Eval(null).Stringify());
