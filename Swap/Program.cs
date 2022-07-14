@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Swap.AST;
-using Swap.Parser.Syntax;
+using Rewrite.AST;
+using Rewrite.Parser.Syntax;
 
-namespace Swap
+namespace Rewrite
 {
     internal class Program
     {

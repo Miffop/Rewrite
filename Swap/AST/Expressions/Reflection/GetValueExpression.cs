@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Expressions.Reflection
+namespace Rewrite.AST.Expressions.Reflection
 {
     internal class GetValueExpression:IExpression,IUnaryOperation
     {

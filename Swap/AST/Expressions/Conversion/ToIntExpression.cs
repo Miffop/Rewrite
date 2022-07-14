@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Expressions.Conversion
+namespace Rewrite.AST.Expressions.Conversion
 {
     internal class ToIntExpression:IOptimizableExpression,IUnaryOperation
     {

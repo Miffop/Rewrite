@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.Parser.Syntax.TokenParsers
+namespace Rewrite.Parser.Syntax.TokenParsers
 {
     internal class WordParser:ITokenParser
     {

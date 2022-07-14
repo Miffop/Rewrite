@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Commands.Structures
+namespace Rewrite.AST.Commands.Structures
 {
     internal class WhileCommand:ProgramList,IUnaryOperation
     {

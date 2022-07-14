@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST
+namespace Rewrite.AST
 {
     internal class ProgramList:ICommand
     {

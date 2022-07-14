@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Expressions.Math
+namespace Rewrite.AST.Expressions.Math
 {
     internal class DiffExpression: IOptimizableExpression,IBinaryOperation
     {

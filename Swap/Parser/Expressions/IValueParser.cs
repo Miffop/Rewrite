@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.Parser.Expressions
+namespace Rewrite.Parser.Expressions
 {
     internal interface IValueParser
     {

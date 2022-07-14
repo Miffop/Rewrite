@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Values
+namespace Rewrite.AST.Values
 {
     internal class VNull:IValue
     {

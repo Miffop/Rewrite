@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Commands
+namespace Rewrite.AST.Commands
 {
     internal class SwapCommand:ICommand,IBinaryOperation
     {
@@ -20,6 +20,7 @@ namespace Swap.AST.Commands
 
         protected override LinkedListNode<ICommand> Exec(Context c)
         {
+            LinkedListNode<ICommand> NextCom=this.Parent.Next;
             IValue lineA = AExp.Expression.Eval(c);
             IValue lineB = BExp.Expression.Eval(c);
             
@@ -41,7 +42,7 @@ namespace Swap.AST.Commands
                     nA.Value.Parent = nB;
                     nB.Value.Parent = nA;
                 }
-                return Parent.Next;
+                return NextCom;
             }
             else if(lineA.GetExpression(out eA) && lineB.GetExpression(out eB))
             {
@@ -56,7 +57,7 @@ namespace Swap.AST.Commands
                     eA.Parent = ecB;
                     eB.Parent = ecA;
                 }
-                return Parent.Next;
+                return NextCom;
             }
             else
             {

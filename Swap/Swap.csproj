@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{157B0F34-FD2C-4D77-8F11-D321ED930916}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Swap</RootNamespace>
-    <AssemblyName>Swap</AssemblyName>
+    <RootNamespace>Rewrite</RootNamespace>
+    <AssemblyName>Rewrite</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.Parser.Commands
+namespace Rewrite.Parser.Commands
 {
     internal class CommandParser
     {

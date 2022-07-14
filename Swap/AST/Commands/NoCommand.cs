@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Swap.AST.Commands
+namespace Rewrite.AST.Commands
 {
     internal class NoCommand:ICommand
     {

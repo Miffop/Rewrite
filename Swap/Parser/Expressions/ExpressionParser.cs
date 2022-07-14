@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Swap.AST;
+using Rewrite.AST;
 
-namespace Swap.Parser.Expressions
+namespace Rewrite.Parser.Expressions
 {
     internal class ExpressionParser
     {
