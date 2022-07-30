@@ -23,7 +23,7 @@ namespace Rewrite.AST.Commands.Structures
         }
         public override string Stringify()
         {
-            return $"if({AExp.Stringify()})\n{base.Stringify()}";
+            return $"If({AExp.Stringify()})\n{base.Stringify()}";
         }
     }
 }
