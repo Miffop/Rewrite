@@ -61,6 +61,7 @@
     <Compile Include="AST\Expressions\Comparison\LessExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\GreaterExpression.cs" />
     <Compile Include="AST\Expressions\Conversion\ToIntExpression.cs" />
+    <Compile Include="AST\Expressions\Conversion\ToStringExpression.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\NotEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\EqualExpression.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="AST\Values\VNode.cs" />
     <Compile Include="AST\Values\VString.cs" />
     <Compile Include="Parser\Commands\CommandParser.cs" />
+    <Compile Include="Parser\Commands\CommandParsers\AssignCommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\EmptyCommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\UnaryCommandParser.cs" />
     <Compile Include="Parser\Commands\CommandParsers\ReflectionCommandParser.cs" />

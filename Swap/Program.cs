@@ -57,6 +57,7 @@ namespace Rewrite
                         new Parser.Commands.CommandParsers.UnaryCommandParser(),
                         new Parser.Commands.CommandParsers.ReflectionCommandParser(),
                         new Parser.Commands.CommandParsers.EmptyCommandParser(),
+                        new Parser.Commands.CommandParsers.AssignCommandParser(),
                     },
                     new List<Parser.Commands.IStructureParser>()
                     {

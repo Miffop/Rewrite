@@ -20,6 +20,7 @@ namespace Rewrite.Parser.Syntax.TokenParsers
                 code[index] == ';' ||
                 code[index] == '.' ||
                 code[index] == ',' ||
+                code[index] == '=' ||
                 code[index] == ':';
         }
         public Token Parse(string code,int index)
@@ -38,6 +39,8 @@ namespace Rewrite.Parser.Syntax.TokenParsers
                         return new Token("Oper", "::");
                     }
                     return new Token("Oper", ":");
+                case '=':
+                    return new Token("=", "");
                 default:
                     throw new Exception();
             }

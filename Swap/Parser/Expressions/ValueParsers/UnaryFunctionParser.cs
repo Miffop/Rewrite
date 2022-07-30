@@ -15,7 +15,8 @@ namespace Rewrite.Parser.Expressions.ValueParsers
                 if (
                     code[index].Argument == "Line" ||
                     code[index].Argument == "Value" ||
-                    code[index].Argument == "Int"
+                    code[index].Argument == "Int" ||
+                    code[index].Argument == "String"
                     )
                 {
                     if (code[index + 1].Command != "BraceOpen")
@@ -37,6 +38,9 @@ namespace Rewrite.Parser.Expressions.ValueParsers
                             break;
                         case "Int":
                             exp = new AST.Expressions.Conversion.ToIntExpression(Base, null);
+                            break;
+                        case "String":
+                            exp = new AST.Expressions.Conversion.ToStringExpression(Base, null);
                             break;
                         default:
                             throw new Exception("This must be a bug");

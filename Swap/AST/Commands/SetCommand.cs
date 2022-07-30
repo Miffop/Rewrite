@@ -61,7 +61,8 @@ namespace Rewrite.AST.Commands
         }
         public override string Stringify()
         {
-            return $"Set({AExp.Stringify()},{BExp.Stringify()});";
+
+            return $"{AExp.Stringify()}={BExp.Stringify()};";
         }
     }
 }
