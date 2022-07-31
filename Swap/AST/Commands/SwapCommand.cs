@@ -39,8 +39,8 @@ namespace Rewrite.AST.Commands
                     nB.Value.Line = i;
                 }
                 {
-                    nA.Value.Parent = nB;
-                    nB.Value.Parent = nA;
+                    nA.Value.Parent = nA;
+                    nB.Value.Parent = nB;
                 }
                 return NextCom;
             }

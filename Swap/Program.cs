@@ -62,6 +62,7 @@ namespace Rewrite
                     new List<Parser.Commands.IStructureParser>()
                     {
                         new Parser.Commands.StructureParsers.WhileAndIfStructParser(),
+                        new Parser.Commands.StructureParsers.SubBlockParser(),
                     }
                 );
                 var com = new ProgramList(1);

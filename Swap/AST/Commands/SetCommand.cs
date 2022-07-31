@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Rewrite.AST.Commands
 {
-    internal class SetCommand:ICommand,IBinaryOperation
+    internal class SetCommand : ICommand, IBinaryOperation
     {
         public ExpressionContainer AExp { get; set; }//Address
         public ExpressionContainer BExp { get; set; }//Value
-        public SetCommand(ExpressionContainer addr, ExpressionContainer val,int ln)
+        public SetCommand(ExpressionContainer addr, ExpressionContainer val, int ln)
         {
             this.AExp = addr;
             this.BExp = val;
@@ -21,9 +21,9 @@ namespace Rewrite.AST.Commands
             IValue vA = AExp.Expression.Eval(c);
             IExpression exp;
             LinkedListNode<ICommand> node;
-            if(vA.GetNode(out node))
+            if (vA.GetNode(out node))
             {
-                if(node.Value is StoreCommand)
+                if (node.Value is StoreCommand)
                 {
                     (node.Value as StoreCommand).Data = BExp.Expression.Eval(c);
                 }
@@ -34,27 +34,27 @@ namespace Rewrite.AST.Commands
                 }
                 return Parent.Next;
             }
-            if(vA.GetExpression(out exp))
+            if (vA.GetExpression(out exp))
             {
-                if(exp is Expressions.ValueExpression)
+                IValue vB = BExp.Expression.Eval(c);
+                IExpression eB;
+                if (!vB.GetExpression(out eB))
                 {
-                    (exp as Expressions.ValueExpression).Value=BExp.Expression.Eval(c);
-                }
-                else
-                {
-                    IValue vB = BExp.Expression.Eval(c);
-                    IExpression eB;
-                    if(!vB.GetExpression(out eB))
+                    if(exp is Expressions.ValueExpression)
                     {
-                        eB = new Expressions.ValueExpression(vB, exp.Parent);
+                        (exp as Expressions.ValueExpression).Value = vB;
+                        eB = exp;
                     }
                     else
                     {
-                        eB.Parent = exp.Parent;
+                        eB = new Expressions.ValueExpression(vB, exp.Parent);
                     }
-                    exp.Parent.Expression = eB;
-                    
                 }
+                else
+                {
+                    eB.Parent = exp.Parent;
+                }
+                exp.Parent.Expression = eB;
                 return Parent.Next;
             }
             throw new Exception($"Address expected: {this.Stringify()}");

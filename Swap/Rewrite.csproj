@@ -98,6 +98,7 @@
     <Compile Include="Parser\Commands\CommandParsers\ReflectionCommandParser.cs" />
     <Compile Include="Parser\Commands\ICommandParser.cs" />
     <Compile Include="Parser\Commands\IStructureParser.cs" />
+    <Compile Include="Parser\Commands\StructureParsers\SubBlockParser.cs" />
     <Compile Include="Parser\Commands\StructureParsers\WhileAndIfStructParser.cs" />
     <Compile Include="Parser\Expressions\ExpressionParser.cs" />
     <Compile Include="Parser\Expressions\IValueParser.cs" />

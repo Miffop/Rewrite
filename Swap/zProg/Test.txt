@@ -1,5 +1,4 @@
-﻿9.Print(root);
-1.Print(root);
-2.root:3::0=[root:3::0];
-3.Print(root);
-4.current=Value([root:3]);
+﻿1.root:4::0=1;
+2.root:4::0=[current];
+4.Print(root);
+5.Print(root);
