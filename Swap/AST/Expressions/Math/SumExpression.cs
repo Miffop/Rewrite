@@ -50,16 +50,16 @@ namespace Rewrite.AST.Expressions.Math
         public bool IsConstant()
         {
             return
-                AExp is IOptimizableExpression && 
-                BExp is IOptimizableExpression &&
-                (AExp as IOptimizableExpression).IsConstant() &&
-                (BExp as IOptimizableExpression).IsConstant();
+                AExp.Expression is IOptimizableExpression && 
+                BExp.Expression is IOptimizableExpression &&
+                (AExp.Expression as IOptimizableExpression).IsConstant() &&
+                (BExp.Expression as IOptimizableExpression).IsConstant();
 
         }
         public IExpression Optimise()
         {
             AExp.TryOptimise();
-            AExp.TryOptimise();
+            BExp.TryOptimise();
             if(IsConstant())
             {
                 return new ValueExpression(Eval(null), this.Parent);
