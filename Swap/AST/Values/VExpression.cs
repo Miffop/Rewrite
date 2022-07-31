@@ -35,7 +35,7 @@ namespace Rewrite.AST.Values
         }
         public string Stringify()
         {
-            return exp.Stringify();
+            return $"[{exp.Stringify()}]";
         }
     }
 }

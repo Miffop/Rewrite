@@ -28,11 +28,11 @@ namespace Rewrite.Parser.Syntax.TokenParsers
                     return new Token("BraceOpen", "[");
 
                 case ')':
-                    return new Token("BraceClose", ")");
+                    return new Token("BraceClose", "(");
                 case '}':
-                    return new Token("BraceClose", "}");
+                    return new Token("BraceClose", "{");
                 case ']':
-                    return new Token("BraceClose", "]");
+                    return new Token("BraceClose", "[");
 
                 default:
                     throw new Exception();

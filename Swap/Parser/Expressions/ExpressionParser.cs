@@ -57,7 +57,14 @@ namespace Rewrite.Parser.Expressions
                     {
                         throw new Exception("Closing Brace Expected");
                     }
-                    return Parse(code, index + 1, length - 2);
+                    ExpressionContainer res = Parse(code, index + 1, length - 2);
+                    if (code[index].Argument == "[")
+                    {
+                        return new AST.ExpressionContainer(
+                            new AST.Expressions.ValueExpression(new AST.Values.VExpression(res.Expression), null)
+                        );
+                    }
+                    return res;
                 }
                 else if (length == 0)
                 {

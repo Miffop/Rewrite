@@ -1,4 +1,4 @@
-﻿0.Print(root);
-1."root:3::0";
-2.root:3::0=Value(root:1);
+﻿1.Print(root);
+2.root:3::0=[root:3::0];
 3.Print(root);
+4.Print(root);
