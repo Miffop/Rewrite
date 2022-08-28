@@ -60,6 +60,7 @@
     <Compile Include="AST\Expressions\Comparison\LessEqualExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\LessExpression.cs" />
     <Compile Include="AST\Expressions\Comparison\GreaterExpression.cs" />
+    <Compile Include="AST\Expressions\Conversion\ToCharExpression.cs" />
     <Compile Include="AST\Expressions\Conversion\ToIntExpression.cs" />
     <Compile Include="AST\Expressions\Conversion\ToStringExpression.cs" />
     <Compile Include="AST\Expressions\CurrentNodeExpression.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="AST\Expressions\Comparison\EqualExpression.cs" />
     <Compile Include="AST\Expressions\InputExpression.cs" />
     <Compile Include="AST\Expressions\Reflection\SubExpExpression.cs" />
+    <Compile Include="AST\Expressions\Strings\LengthExp.cs" />
     <Compile Include="AST\IBinaryOperation.cs" />
     <Compile Include="AST\IUnaryOperation.cs" />
     <Compile Include="AST\Expressions\Math\ModExpression.cs" />
@@ -129,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Test.txt" />
+    <Content Include="zProg\BFI.txt" />
     <Content Include="zProg\cat.txt" />
     <Content Include="zProg\fizz-buzz.txt" />
     <Content Include="zProg\Test.txt" />

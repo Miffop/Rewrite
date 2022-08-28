@@ -2,3 +2,6 @@
 2.root:4::0=[current];
 4.Print(root);
 5.Print(root);
+6.[2+2*2];
+7.7;
+8.Print(Value(Value(root:6))+1);

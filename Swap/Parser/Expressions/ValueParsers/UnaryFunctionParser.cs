@@ -16,7 +16,9 @@ namespace Rewrite.Parser.Expressions.ValueParsers
                     code[index].Argument == "Line" ||
                     code[index].Argument == "Value" ||
                     code[index].Argument == "Int" ||
-                    code[index].Argument == "String"
+                    code[index].Argument == "String" ||
+                    code[index].Argument == "Length" ||
+                    code[index].Argument == "Char"
                     )
                 {
                     if (code[index + 1].Command != "BraceOpen")
@@ -41,6 +43,12 @@ namespace Rewrite.Parser.Expressions.ValueParsers
                             break;
                         case "String":
                             exp = new AST.Expressions.Conversion.ToStringExpression(Base, null);
+                            break;
+                        case "Length":
+                            exp = new AST.Expressions.Strings.LengthExp(Base, null);
+                            break;
+                        case "Char":
+                            exp = new AST.Expressions.Conversion.ToCharExpression(Base, null);
                             break;
                         default:
                             throw new Exception("This must be a bug");

@@ -43,6 +43,11 @@ namespace Rewrite.AST.Expressions.Reflection
                     return new Values.VExpression((eA as IBinaryOperation).BExp.Expression);
                 }
             }
+            if(vA.GetString(out string sA) && vB.GetInteger(out iB))
+            {
+                //var m = sA.Length;
+                return new Values.VString(sA[iB].ToString());
+            }
             throw new Exception($"Cannot perform: {this.Stringify()}");
         }
         public string Stringify()

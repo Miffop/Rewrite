@@ -56,6 +56,7 @@ namespace Rewrite.Parser.Commands
                         return result;
                     }
                 }
+                //If not a command
                 AST.ExpressionContainer exp = expHandler.Parse(code, index + 2, length - 3);
                 if(exp.Expression is AST.IOptimizableExpression && (exp.Expression as AST.IOptimizableExpression).IsConstant())
                 {
@@ -63,7 +64,8 @@ namespace Rewrite.Parser.Commands
                 }
                 else
                 {
-                    return new AST.Commands.StoreCommand(new AST.Values.VExpression(exp.Expression), Line);
+                    throw new Exception($"Unknown syntax line:{Line}");
+                    //return new AST.Commands.StoreCommand(new AST.Values.VExpression(exp.Expression), Line);
                 }
             }
         }

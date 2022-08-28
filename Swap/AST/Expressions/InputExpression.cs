@@ -19,7 +19,7 @@ namespace Rewrite.AST.Expressions
         }
         public string Stringify()
         {
-            return $"Input()";
+            return $"input";
         }
     }
 }

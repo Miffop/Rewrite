@@ -17,6 +17,10 @@ namespace Rewrite.AST.Expressions.Math
             this.BExp = b;
             this.Parent = parent;
         }
+        private int Mod(int a,int b)
+        {
+            return (a >= 0) ? (a % b) : (a % b + b);
+        }
         public IValue Eval(Context c)
         {
             IValue A = AExp.Expression.Eval(c);
@@ -25,7 +29,7 @@ namespace Rewrite.AST.Expressions.Math
             int iA, iB;
             if(A.GetInteger(out iA) && B.GetInteger(out iB))
             {
-                return new Values.VInteger(iA % iB);
+                return new Values.VInteger(Mod(iA,iB));
             }
             else
             {

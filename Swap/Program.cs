@@ -26,7 +26,7 @@ namespace Rewrite
                     new Parser.Syntax.TokenParsers.WordParser(),
                     new Parser.Syntax.TokenParsers.ComparisonParser(),
                 });
-                string code = System.IO.File.ReadAllText("./../../zProg/Test.txt");
+                string code = System.IO.File.ReadAllText("./../../zProg/BFI.txt");
                 //string code = "4*2*this";
                 tokens = sp.Parse(code);
             }
@@ -71,12 +71,14 @@ namespace Rewrite
 
                 LinkedListNode<ICommand> rootNode = new LinkedListNode<ICommand>(com);
                 com.Parent = rootNode;
+                
+                
                 com.Execute(new Context(com, com));
 
 
             }
             //Console.WriteLine(result.Eval(null).Stringify());
-
+            
             Console.ReadKey();
         }
     }
